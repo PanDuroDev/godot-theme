@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT — dialogs</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="dialogs"></aside>
+
+      <div class="docs-main">
+        <h1>Dialogs</h1>
+        <p class="hero-tag">Mirrors ConfirmationDialog, ProjectDialog, EditorFileDialog. Backdrop click and Cancel close; try creating with an empty name.</p>
+        <div class="gal-row">
+          <button class="btn" id="dlgBtn"><span>New project</span></button>
+          <button class="btn" id="fileBtn"><span>File browser</span></button>
+          <button class="btn" id="aboutBtn"><span>About</span></button>
+        </div>
+        <pre class="code">&lt;div id="dlgNew" class="dlg-back" hidden&gt;
+  &lt;div class="dlg"&gt;
+    &lt;h3&gt;Create New Project&lt;/h3&gt;
+    &lt;div class="row"&gt;&lt;input type="text"&gt;&lt;/div&gt;
+    &lt;div class="dlg-msg"&gt;&lt;/div&gt;
+    &lt;div class="dlg-actions"&gt;…&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+GodotDS.bindDialog('dlgNew', 'npCreate', 'npCancel', onCreate);</pre>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span>.dlg-back · .dlg(.wide/.about) · .fdlist · .dlg-msg</span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+
+<div id="dlgDemo" class="dlg-back" hidden>
+  <div class="dlg" role="dialog" aria-modal="true">
+    <h3>Create New Project</h3>
+    <label>Project Name:</label>
+    <div class="row"><input type="text" id="npName" value="New Game Project"></div>
+    <div id="npMsg" class="dlg-msg"></div>
+    <label class="check"><input type="checkbox" id="npEdit" checked><span class="box"><svg class="ok" viewBox="0 0 16 16" width="12" height="12"><rect width="14" height="14" x="1" y="1" fill="#699ce8" rx="2.33"/><path fill="#fff" d="M11.5 3.734 5.89 9.346 4.185 7.665l-1.5 1.499 3.204 3.18L13 5.235z"/></svg><svg class="er" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span> Edit Now</label>
+    <div class="dlg-actions"><button class="btn accent" id="npCreate"><img src="icons/Add.svg" alt=""><span>Create</span></button><button class="btn" id="npCancel"><span>Cancel</span></button></div>
+  </div>
+</div>
+
+<div id="dlgFileDemo" class="dlg-back" hidden>
+  <div class="dlg wide" role="dialog" aria-modal="true">
+    <h3>Select a folder</h3>
+    <div class="row"><button class="btn small" data-toast="Up (demo)"><img src="icons/ArrowUp.svg" alt=""><span>Up</span></button><input type="text" value="C:\GodotProjects"><button class="btn small" data-toast="Go (demo)"><span>Go</span></button></div>
+    <div class="fdlist" id="fdListDemo">
+      <div class="fdrow"><img src="icons/FolderBrowse.svg" alt=""><span>demo</span><span class="meta">folder</span></div>
+      <div class="fdrow sel"><img src="icons/FolderBrowse.svg" alt=""><span>demo2</span><span class="meta">folder</span></div>
+      <div class="fdrow"><img src="icons/FileBrowse.svg" alt=""><span>project.godot</span><span class="meta">1 KB</span></div>
+    </div>
+    <div class="dlg-actions"><button class="btn" id="fdOkDemo"><img src="icons/ToolSelect.svg" alt=""><span>Select</span></button><button class="btn" id="fdCancelDemo"><span>Cancel</span></button></div>
+  </div>
+</div>
+
+<div id="dlgAboutDemo" class="dlg-back" hidden>
+  <div class="dlg about" role="dialog" aria-modal="true">
+    <div class="about-head"><img src="icons/ProjectList.svg" width="56" height="56" alt=""><div><h3>GT</h3><div class="muted"><span class="ver-pill"></span> — Godot Theme</div></div></div>
+    <p class="muted">The Godot 4.6+ dark editor theme as a vanilla CSS library: tokens, components, icons, and tiny JS helpers for Electron apps.</p>
+    <div class="dlg-actions left"><button class="btn small" data-toast="godotengine.org (demo)"><img src="icons/ExternalLink.svg" alt=""><span>Godot Website</span></button><button class="btn small" id="abCloseDemo" style="margin-left:auto"><span>Close</span></button></div>
+  </div>
+</div>
+
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+document.querySelectorAll('[data-toast]').forEach((b) => { b.onclick = () => GodotDS.toast(b.dataset.toast, 'info'); });
+GodotDS.bindDialog('dlgDemo', 'npCreate', 'npCancel', () => {
+  const name = document.getElementById('npName').value.trim();
+  const msg = document.getElementById('npMsg');
+  if (!name) { msg.textContent = 'Enter a project name'; msg.className = 'dlg-msg err'; return; }
+  msg.textContent = `Created "${name}" (demo)`;
+  msg.className = 'dlg-msg ok';
+  GodotDS.toast(`Created "${name}"`, 'success');
+});
+document.getElementById('dlgBtn').onclick = () => GodotDS.openDialog('dlgDemo');
+document.querySelectorAll('#fdListDemo .fdrow').forEach((r) => {
+  r.onclick = () => {
+    document.querySelectorAll('#fdListDemo .fdrow').forEach((x) => x.classList.remove('sel'));
+    r.classList.add('sel');
+  };
+});
+GodotDS.bindDialog('dlgFileDemo', 'fdOkDemo', 'fdCancelDemo', () => {
+  const sel = document.querySelector('#fdListDemo .fdrow.sel span').textContent;
+  GodotDS.closeDialog('dlgFileDemo');
+  GodotDS.toast('Selected: ' + sel, 'success');
+});
+document.getElementById('fileBtn').onclick = () => GodotDS.openDialog('dlgFileDemo');
+document.getElementById('aboutBtn').onclick = () => GodotDS.openDialog('dlgAboutDemo');
+document.getElementById('abCloseDemo').onclick = () => GodotDS.closeDialog('dlgAboutDemo');
+
+</script>
+</body>
+</html>

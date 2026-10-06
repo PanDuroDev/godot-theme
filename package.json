@@ -1,0 +1,75 @@
+{
+  "name": "godot-theme",
+  "version": "1.2.0",
+  "description": "GT (Godot Theme) — dark Godot editor theme as a vanilla CSS + tiny JS design system for Electron apps",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "main": "./godot.css",
+  "types": "./godot.d.ts",
+  "exports": {
+    ".": "./godot.css",
+    "./tokens": "./tokens/tokens.css",
+    "./tokens.json": "./tokens/godot.json",
+    "./tokens.js": {
+      "types": "./tokens/tokens.d.ts",
+      "default": "./tokens/tokens.js"
+    },
+    "./base": "./src/base.css",
+    "./components/*": "./src/components/*.css",
+    "./icons/*": "./icons/*.svg",
+    "./fonts/*": "./fonts/*",
+    "./js": {
+      "types": "./godot.d.ts",
+      "default": "./godot.js"
+    }
+  },
+  "files": [
+    "godot.css",
+    "godot.js",
+    "godot.d.ts",
+    "tokens/",
+    "src/",
+    "icons/",
+    "fonts/",
+    "index.html",
+    "tokens.html",
+    "icons.html",
+    "fonts.html",
+    "changelog.html",
+    "buttons.html",
+    "rows.html",
+    "forms.html",
+    "dialogs.html",
+    "overlays.html",
+    "site.css",
+    "README.md",
+    "CHANGELOG.md",
+    "docs/"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/build-fonts-zip.mjs",
+    "serve": "vite preview --port 4173 --strictPort",
+    "tokens:build": "node scripts/build-tokens.mjs",
+    "tokens:check": "node scripts/build-tokens.mjs --check",
+    "lint:package": "publint",
+    "icons:build": "node scripts/build-icons.mjs",
+    "test": "node scripts/smoke.mjs && node scripts/verify.mjs && node scripts/build-tokens.mjs --check && publint && node scripts/test-consumer.mjs",
+    "test:consumer": "node scripts/test-consumer.mjs"
+  },
+  "devDependencies": {
+    "publint": "^0.3.25",
+    "vite": "^7"
+  },
+  "keywords": [
+    "design-system",
+    "godot",
+    "electron",
+    "css",
+    "dark-theme",
+    "vanilla"
+  ]
+}

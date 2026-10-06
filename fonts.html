@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT — fonts</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="fonts"></aside>
+
+      <div class="docs-main">
+        <h1>Fonts</h1>
+        <p class="hero-tag">Godot's own files from <span class="mono">thirdparty/fonts</span> (OFL licensed, full versions — not subsets). Inter is the primary font of this whole site, exactly like the Godot editor.</p>
+        <div class="gal-row">
+          <a class="btn go" id="fontsZip" href="godot-theme-fonts.zip" download="godot-theme-fonts.zip"><img src="icons/Download.svg" alt=""><span>Download all fonts (.zip)</span></a>
+          <span class="muted">5 woff2 + OFL licenses</span>
+        </div>
+
+        <div class="gal-sec"><h2>Inter — UI primary (400 / 700)</h2>
+          <div class="gal-row">
+            <a class="btn small" data-font="Inter_Regular"><span>Get Regular</span></a>
+            <a class="btn small" data-font="Inter_Bold"><span>Get Bold</span></a>
+          </div>
+          <div class="spec f-inter">
+            <div class="aa"><span class="w400">Aa</span> <span class="w700">Aa</span></div>
+            <div class="w400">ABCDEFGHIJKLMNOPQRSTUVWXYZ</div>
+            <div class="w400">abcdefghijklmnopqrstuvwxyz</div>
+            <div class="w400">0123456789 !?"'#$%&amp;()*+,-./:;&lt;=&gt;?@[\]^_{|}~</div>
+            <div class="w700">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+            <div class="sizes" style="margin-top:8px">
+              <span style="font-size:11px">11px — side labels, status bar</span>
+              <span style="font-size:12px">12px — pills, tags, toasts</span>
+              <span style="font-size:14px">14px — editor base, buttons, rows</span>
+              <span style="font-size:15px;font-weight:700">15px — row titles</span>
+              <span style="font-size:16px;font-weight:700">16px — dialog headings</span>
+              <span style="font-size:22px;font-weight:700">22px — docs headings</span>
+            </div>
+            <p style="max-width:640px">The Godot editor renders every panel, button, list row, dialog and menu in Inter at 14px. Bold is reserved for titles, headings and the primary reading line — everything else stays regular so the interface keeps one quiet voice.</p>
+          </div>
+          <pre class="code">font-family: "Inter","Vazirmatn","Segoe UI",Tahoma,sans-serif;  /* var(--font) */
+files: fonts/Inter_Regular.woff2, fonts/Inter_Bold.woff2</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Vazirmatn — Arabic fallback (400 / 700)</h2>
+          <div class="gal-row">
+            <a class="btn small" data-font="Vazirmatn_Regular"><span>Get Regular</span></a>
+            <a class="btn small" data-font="Vazirmatn_Bold"><span>Get Bold</span></a>
+          </div>
+          <div class="spec f-vazir" dir="rtl" lang="ar">
+            <div class="aa"><span class="w400">غ</span> <span class="w700">غ</span></div>
+            <div class="w400">ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن هـ و ي</div>
+            <div class="w400">أ إ ؤ ئ ة ى ـً ـٌ ـٍ ـَ ـُ ـِ ـّ ـْ ؟ ، ؛ ٪ × ٠١٢٣٤٥٦٧٨٩</div>
+            <div class="w700">ا ب ت ث ج ح خ د ذ ر ز س ش ص ض ط ظ ع غ ف ق ك ل م ن هـ و ي ٠١٢٣٤٥٦٧٨٩</div>
+            <div class="sizes" style="margin-top:8px">
+              <span style="font-size:12px">12px — تلميحات ووسوم</span>
+              <span style="font-size:14px">14px — النص الأساسي للمحرر</span>
+              <span style="font-size:16px;font-weight:700">16px — عناوين النوافذ</span>
+            </div>
+            <p style="max-width:640px">محرر غودوت يستخدم خط وزيرمتن لكل النصوص العربية تلقائيًا كبديل داخل نفس المكدس، فيظهر التطبيق العربي بنفس روح الثيم دون أي إعداد إضافي.</p>
+          </div>
+          <pre class="code">/* second in the stack: Arabic renders Godot-style automatically */
+files: fonts/Vazirmatn_Regular.woff2, fonts/Vazirmatn_Bold.woff2</pre>
+        </div>
+
+        <div class="gal-sec"><h2>JetBrains Mono — code (400)</h2>
+          <div class="gal-row">
+            <a class="btn small" data-font="JetBrainsMono_Regular"><span>Get Regular</span></a>
+          </div>
+          <div class="spec f-mono">
+            <div class="aa">Ag</div>
+            <div>ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789</div>
+            <div>{}()[];:=&gt;&lt;+-*/#@$_%^&amp;|~`"'.,?! — -&gt; =&gt; == != === &amp;&amp; ||</div>
+            <div class="sizes" style="margin-top:8px">
+              <span style="font-size:10px">10px — progress percentages</span>
+              <span style="font-size:11px">11px — icon names</span>
+              <span style="font-size:12px">12px — code blocks, live state</span>
+            </div>
+            <pre class="code" style="margin-top:8px">GodotDS.toast('Engine downloaded', 'success');
+GodotDS.menu(x, y, items, (item) =&gt; pick(item));
+const ring = (el, p) =&gt; el.style.setProperty('--p', p);</pre>
+          </div>
+          <pre class="code">font-family: "JetBrains Mono",Consolas,monospace;  /* var(--font-mono), class .mono */
+file: fonts/JetBrainsMono_Regular.woff2</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Add to your project</h2>
+          <p class="demo-note"><b>A. npm (automatic)</b> — install once, the bundler emits the font files, <span class="mono">godot.css</span> loads them. Nothing to declare:</p>
+          <pre class="code">npm install godot-theme
+import 'godot-theme';                            // godot.css + fonts, via exports "."
+import { tokens } from 'godot-theme/tokens.js';  // 38 tokens in JS
+import addIcon from 'godot-theme/icons/Add.svg';  // any icon / font file, same way</pre>
+          <p class="demo-note"><b>B. plain CSS / static site</b> — unzip <span class="mono">godot-theme-fonts.zip</span> next to your css and declare the faces:</p>
+          <pre class="code">@font-face{font-family:'Inter';font-weight:400;font-display:swap;
+  src:url('fonts/Inter_Regular.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-weight:700;font-display:swap;
+  src:url('fonts/Inter_Bold.woff2') format('woff2')}
+@font-face{font-family:'Vazirmatn';font-weight:400;font-display:swap;
+  src:url('fonts/Vazirmatn_Regular.woff2') format('woff2')}
+@font-face{font-family:'Vazirmatn';font-weight:700;font-display:swap;
+  src:url('fonts/Vazirmatn_Bold.woff2') format('woff2')}
+@font-face{font-family:'JetBrains Mono';font-weight:400;font-display:swap;
+  src:url('fonts/JetBrainsMono_Regular.woff2') format('woff2')}
+body{font-family:"Inter","Vazirmatn","Segoe UI",Tahoma,sans-serif}
+code{font-family:"JetBrains Mono",Consolas,monospace}</pre>
+          <p class="demo-note"><b>C. React component</b> — classes are plain CSS, so <span class="mono">className</span> just works; helpers live on <span class="mono">window.GodotDS</span>:</p>
+          <pre class="code">import 'godot-theme/js'; // side-effect once (window.GodotDS)
+import addIcon from 'godot-theme/icons/Add.svg';
+
+export function NewButton({ onClick }) {
+  return (
+    &lt;button className="btn" onClick={onClick}&gt;
+      &lt;img src={addIcon} width={16} height={16} alt="" /&gt;
+      &lt;span&gt;New&lt;/span&gt;
+    &lt;/button&gt;
+  );
+}
+const { toast, openDialog } = window.GodotDS;
+toast('Engine downloaded', 'success');</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span>Inter · Vazirmatn · JetBrains Mono — OFL</span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+const fontMods = import.meta.glob('./fonts/*.woff2', { query: '?url', import: 'default', eager: true });
+document.querySelectorAll('[data-font]').forEach((a) => {
+  const url = fontMods[`./fonts/${a.dataset.font}.woff2`];
+  if (url) { a.href = url; a.download = `${a.dataset.font}.woff2`; }
+});
+
+</script>
+</body>
+</html>

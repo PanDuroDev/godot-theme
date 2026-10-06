@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT — buttons</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="buttons"></aside>
+
+      <div class="docs-main">
+        <h1>Buttons</h1>
+        <p class="hero-tag">Every button below is live — click it. Text-only buttons center their label; icon buttons offset it past the icon (same rule, via <span class="mono">:has()</span>).</p>
+
+        <div class="gal-sec"><h2>.btn — Godot Button</h2>
+          <div class="gal-row">
+            <button class="btn" data-toast="New (demo)"><img src="icons/Add.svg" alt=""><span>New</span></button>
+            <button class="btn" data-toast="Import (demo)"><img src="icons/Load.svg" alt=""><span>Import</span></button>
+            <button class="btn accent" data-toast="OK (demo)"><img src="icons/StatusSuccess.svg" alt=""><span>OK</span></button>
+            <button class="btn go" data-toast="Generate (demo)" data-type="success"><img src="icons/AudioStreamRandomizer.svg" alt=""><span>Generate</span></button>
+            <button class="btn danger" data-toast="Delete (demo)" data-type="error"><img src="icons/Remove.svg" alt=""><span>Delete</span></button>
+            <button class="btn" disabled><span>Disabled</span></button>
+          </div>
+          <div class="gal-row">
+            <button class="btn small" data-toast="Refresh (demo)"><img src="icons/Reload.svg" alt=""><span>Refresh</span></button>
+            <button class="btn small opt" id="sortDemo"><img src="icons/Sort.svg" alt=""><span>Sort: Last Edited</span><span class="chev">▾</span></button>
+          </div>
+          <p class="demo-note">Option buttons open a real PopupMenu under the button. Sort uses the official four options with radio marks for the selected one (option_button.cpp); Engine adds a per-option icon (add_icon_radio_check_item pattern).</p>
+          <pre class="code">&lt;button class="btn"&gt;&lt;img src="icons/Add.svg"&gt;&lt;span&gt;New&lt;/span&gt;&lt;/button&gt;
+&lt;button class="btn go"&gt;&lt;img src="icons/AudioStreamRandomizer.svg"&gt;&lt;span&gt;Generate&lt;/span&gt;&lt;/button&gt;
+&lt;button class="btn danger"&gt;&lt;img src="icons/Remove.svg"&gt;&lt;span&gt;Delete&lt;/span&gt;&lt;/button&gt;</pre>
+        </div>
+
+        <div class="gal-sec"><h2>.side-btn — sidebar stack</h2>
+          <div class="gal-row">
+            <div style="background:var(--panel);border-radius:var(--radius);padding:8px">
+              <aside id="sidebar" style="min-height:230px">
+                <div class="sep"></div>
+                <button class="side-btn primary" data-toast="Edit (demo)"><img src="icons/Edit.svg" alt=""><span>Edit</span></button>
+                <button class="side-btn" data-toast="Run (demo)"><img src="icons/Play.svg" alt=""><span>Run</span></button>
+                <button class="side-btn" data-toast="Rename (demo)"><img src="icons/Rename.svg" alt=""><span>Rename</span></button>
+                <button class="side-btn" disabled><img src="icons/Remove.svg" alt=""><span>Remove</span></button>
+                <div class="sep"></div>
+                <label class="side-label">Project Engine:</label>
+                <button class="btn small opt" id="engineDemo" style="width:100%"><img src="icons/Godot.svg" alt=""><span>4.5-stable</span><span class="chev">▾</span></button>
+                <div class="grow"></div>
+                <button class="side-btn" data-toast="Donate (demo)"><img src="icons/Heart.svg" alt=""><span>Donate</span></button>
+              </aside>
+            </div>
+          </div>
+          <pre class="code">&lt;button class="side-btn primary"&gt;&lt;img src="icons/Edit.svg"&gt;&lt;span&gt;Edit&lt;/span&gt;&lt;/button&gt;</pre>
+        </div>
+
+        <div class="gal-sec"><h2>.flat / .linklike / .view-toggle</h2>
+          <div class="gal-row">
+            <button class="flat" data-toast="Settings (demo)"><img src="icons/Tools.svg" width="16" height="16" alt=""><span>Settings</span></button>
+            <button class="linklike" data-toast="More info (demo)">More information</button>
+          </div>
+          <div class="gal-row" id="viewDemo">
+            <button class="view-toggle active"><img src="icons/ProjectList.svg" width="16" height="16" alt=""><span>Projects</span></button>
+            <button class="view-toggle"><img src="icons/History.svg" width="16" height="16" alt=""><span>Versions</span></button>
+          </div>
+          <p class="demo-note">Active view toggle = accent text, no background (MainScreenButton). Click to switch.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span>.btn · .side-btn · .flat · .view-toggle · .linklike</span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+document.querySelectorAll('[data-toast]').forEach((b) => { b.onclick = () => GodotDS.toast(b.dataset.toast, b.dataset.type || 'info'); });
+function pickInto(btn, fmt, state) {
+  return (v, it) => {
+    state.current = v;
+    btn.querySelector('span').textContent = fmt(it);
+    GodotDS.toast(fmt(it), 'info');
+  };
+}
+// Official ProjectManager order (project_manager.cpp) + radio marks (option_button.cpp).
+const SORT_OPTS = [
+  { v: 'edited', label: 'Last Edited', radio: true },
+  { v: 'name', label: 'Name', radio: true },
+  { v: 'path', label: 'Path', radio: true },
+  { v: 'tags', label: 'Tags', radio: true },
+];
+const sortState = { current: 'edited' };
+document.getElementById('sortDemo').onclick = (e) => {
+  GodotDS.optMenu(e.currentTarget, SORT_OPTS, sortState.current, pickInto(e.currentTarget, (it) => 'Sort: ' + it.label, sortState));
+};
+// add_icon_radio_check_item pattern: icon per option + radio for current.
+const ENGINE_OPTS = [
+  { v: '4.5-stable', label: '4.5-stable', icon: 'icons/Godot.svg', radio: true },
+  { v: '4.4.1-stable', label: '4.4.1-stable', icon: 'icons/Godot.svg', radio: true },
+  { v: '3.5.3-stable', label: '3.5.3-stable', icon: 'icons/Godot.svg', radio: true },
+];
+const engineState = { current: '4.5-stable' };
+document.getElementById('engineDemo').onclick = (e) => {
+  GodotDS.optMenu(e.currentTarget, ENGINE_OPTS, engineState.current, pickInto(e.currentTarget, (it) => it.label, engineState));
+};
+document.querySelectorAll('#viewDemo .view-toggle').forEach((b) => {
+  b.onclick = () => {
+    document.querySelectorAll('#viewDemo .view-toggle').forEach((x) => x.classList.remove('active'));
+    b.classList.add('active');
+  };
+});
+
+</script>
+</body>
+</html>

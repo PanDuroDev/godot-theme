@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT — overlays</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="overlays"></aside>
+
+      <div class="docs-main">
+        <h1>Overlays</h1>
+        <p class="hero-tag">EditorToaster, context menu, TooltipPanel, progress. Everything below is live.</p>
+
+        <div class="gal-sec"><h2>Toasts</h2>
+          <div class="gal-row">
+<button class="btn" id="toastInfo"><img src="icons/Info.svg" alt=""><span>Info</span></button>
+          <button class="btn" id="toastOk"><img src="icons/StatusSuccess.svg" alt=""><span>Success</span></button>
+          <button class="btn" id="toastWarn"><img src="icons/StatusWarning.svg" alt=""><span>Warn</span></button>
+          <button class="btn" id="toastErr"><img src="icons/StatusError.svg" alt=""><span>Error</span></button>
+          </div>
+          <pre class="code">GodotDS.toast('Engine downloaded', 'success', 'Done');
+// types: info | success | warn | error — auto-dismiss 5s, ✕ closes</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Context menu</h2>
+          <div class="gal-row"><button class="btn" id="menuBtn"><img src="icons/TripleBar.svg" alt=""><span>Show menu</span></button></div>
+          <div id="menuZone" style="background:var(--panel-dark);border-radius:var(--radius);padding:26px;text-align:center;color:var(--faint)">Right-click here — like project rows in godot-launcher</div>
+          <pre class="code">GodotDS.menu(x, y, [
+  { label: 'Open', icon: 'icons/Play.svg', accel: 'Ctrl+O' },
+  { label: 'Show hidden', checked: true },  // toggleable, menu stays open
+  { sep: true },
+  { label: 'More…', submenu: [               // real second panel ▶
+    { label: 'Option A', checked: false },
+    { label: 'Option B' },
+  ] },
+  { label: 'Remove', disabled: true },
+], (item, info) => …);  // self-dismisses on outside click / Escape</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Tooltip</h2>
+          <div class="gal-row">
+            <button class="btn" data-tip="TooltipPanel: dark popup, bright text, follows cursor"><span>Hover me</span></button>
+            <span class="tag" data-tip="Tags can carry tooltips too">hover tag</span>
+          </div>
+          <pre class="code">&lt;button data-tip="…"&gt;…&lt;/button&gt;  +  &lt;div id="tooltip" hidden&gt;&lt;/div&gt;</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Progress + spinner</h2>
+          <div class="gal-row"><button class="btn small" id="dlStart"><img src="icons/Download.svg" alt=""><span>Start download</span></button><span class="muted" id="dlPct">0%</span></div>
+          <div class="dlbar" style="max-width:320px"><i id="dlFill" style="width:0%"></i></div>
+          <div class="gal-row" style="margin-top:8px">
+            <span class="radial" id="ringDemo"><svg width="44" height="44" viewBox="0 0 44 44"><circle class="rk-track" cx="22" cy="22" r="18"></circle><circle class="rk-fill" cx="22" cy="22" r="18"></circle></svg><span class="pct">0%</span></span>
+            <span class="muted">Determinate ring — TextureProgressBar clockwise from top</span>
+          </div>
+          <pre class="code">&lt;span class="radial"&gt;&lt;svg …&gt;&lt;circle class="rk-track" …/&gt;&lt;circle class="rk-fill" …/&gt;&lt;/svg&gt;&lt;span class="pct"&gt;0%&lt;/span&gt;&lt;/span&gt;
+GodotDS.ring(el, 65);  // indeterminate? use .spin</pre>
+          <div class="gal-row" style="margin-top:8px"><div class="spin"></div><span class="muted">Loading… (indeterminate)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span>.toast-note · #ctxMenu · #tooltip · .dlbar · .spin</span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="ctxMenu" hidden></div>
+<div id="toaster"></div>
+<div id="tooltip" hidden></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+document.getElementById('toastInfo').onclick = () => GodotDS.toast('Editor note', 'info', 'Info');
+document.getElementById('toastOk').onclick = () => GodotDS.toast('Engine downloaded', 'success', 'Done');
+document.getElementById('toastWarn').onclick = () => GodotDS.toast('Unstable build', 'warn', 'Careful');
+document.getElementById('toastErr').onclick = () => GodotDS.toast('Download failed', 'error', 'Error');
+const MENU_ITEMS = [
+  { label: 'Open', icon: 'icons/Play.svg', accel: 'Ctrl+O' },
+  { label: 'Show hidden files', checked: true },
+  { sep: true },
+  { label: 'More…', submenu: [
+    { label: 'Option A', checked: false },
+    { label: 'Option B' },
+  ] },
+  { label: 'Remove', icon: 'icons/Remove.svg', disabled: true },
+];
+function openMenuAt(x, y) {
+  GodotDS.menu(x, y, MENU_ITEMS, (it, info) => {
+    if (info && info.toggled) GodotDS.toast(`${it.label}: ${it.checked ? 'on' : 'off'}`, 'info');
+    else GodotDS.toast(it.label + ' (demo)', 'info');
+  });
+}
+document.getElementById('menuZone').addEventListener('contextmenu', (e) => { e.preventDefault(); openMenuAt(e.clientX, e.clientY); });
+document.getElementById('menuBtn').onclick = (e) => { const r = e.target.closest('button').getBoundingClientRect(); openMenuAt(r.left, r.bottom + 4); };
+const tip = GodotDS.tips();
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') tip.hidden = true; });
+let dlTimer = null;
+document.getElementById('dlStart').onclick = (e) => {
+  if (dlTimer) return;
+  const fill = document.getElementById('dlFill');
+  const pct = document.getElementById('dlPct');
+  const btn = e.currentTarget;
+  btn.disabled = true;
+  let p = 0;
+  dlTimer = setInterval(() => {
+    p = Math.min(100, p + 8);
+    fill.style.width = p + '%';
+    pct.textContent = p + '%';
+    GodotDS.ring(document.getElementById('ringDemo'), p);
+    if (p >= 100) { clearInterval(dlTimer); dlTimer = null; btn.disabled = false; GodotDS.toast('Download complete', 'success'); }
+  }, 120);
+};
+
+</script>
+</body>
+</html>

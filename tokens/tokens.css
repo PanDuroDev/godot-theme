@@ -1,0 +1,41 @@
+/* AUTO-GENERATED from tokens/godot.json — do not edit. Run: npm run tokens:build */
+:root{
+  --bg:#141414; /* Godot window_complex */
+  --panel:#292929; /* Godot base_color 0.161 */
+  --panel-dark:#1c1c1c; /* Inputs / file lists */
+  --list-bg:#1f1f1f; /* Project list panel surface (godot-launcher) */
+  --popup:#121212; /* Menus / tooltips popup surface (godot-launcher) */
+  --btn:#424242; /* Button normal (Godot Button normal stylebox family) */
+  --btn-hover:#4d4d4d; /* Button hover */
+  --btn-pressed:#505050; /* Button pressed */
+  --btn-border:#484848; /* Button border */
+  --accent:#569eff; /* Godot accent_color 0.337,0.62,1.0 */
+  --accent-hover:#77b0ff; /* Accent hover (godot-launcher derivation) */
+  --success:#73f280; /* StatusSuccess family */
+  --danger:#ff786b; /* StatusError family */
+  --warn:#d4c79e; /* StatusWarning family */
+  --text:rgba(255,255,255,.75); /* Primary font color */
+  --muted:rgba(255,255,255,.55); /* Secondary font color (control_font_low scale) */
+  --faint:rgba(255,255,255,.35); /* Disabled / placeholder (control_font_disabled scale) */
+  --sep:rgba(0,0,0,.45); /* Separators */
+  --sel:#353535; /* Selected row (Godot selection family) */
+  --sel-hover:#383838; /* Selected row hover */
+  --row-hover:#2c2c2c; /* Row hover */
+  --brand-blue:#478cbf; /* Godot Blue */
+  --brand-gray:#414042; /* Godot Gray */
+  --scroll-thumb:rgba(255,255,255,.225); /* Scrollbar thumb (godot-launcher) */
+  --scroll-thumb-hover:rgba(255,255,255,.5); /* Scrollbar thumb hover */
+  --selection:rgba(86,158,255,.4); /* Text selection */
+  --radius:4px; /* Modern default corner_radius (editor_theme_manager.cpp) */
+  --font:"Inter","Vazirmatn","Segoe UI",Tahoma,sans-serif; /* Inter substitutes nothing */
+  --font-mono:"JetBrains Mono",Consolas,monospace; /* Godot's code font (editor_fonts.cpp, customizable via code_font setting) */
+  --font-size:14px; /* Godot editor base font size (editor_fonts.cpp) */
+  --title-size:15px; /* Row title = base + 1, bold (project_list.cpp) */
+  --small-size:12px; /* Meta / pills / toasts */
+  --tiny-size:11px; /* Side labels / status bar */
+  --gap:4px; /* Godot Default spacing preset base_spacing (editor_theme_manager.cpp). Compact=2, Spacious=6 */
+  --titlebar-h:44px; /* Title bar min-height (project_manager.cpp layout) */
+  --row-icon:64px; /* Project row icon */
+  --row-icon-sm:40px; /* Versions/dense row icon (godot-launcher derivation) */
+  --sidebar-w:160px; /* Sidebar width (project_manager.cpp layout) */
+}

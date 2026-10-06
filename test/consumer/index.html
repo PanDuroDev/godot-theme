@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>consumer — godot-theme via node_modules (file://, no build)</title>
+<link rel="stylesheet" href="node_modules/godot-theme/godot.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="node_modules/godot-theme/icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;external consumer</b></span>
+    <div id="viewToggles"><button class="view-toggle active">Projects</button></div>
+  </header>
+  <div id="mainPanel">
+    <div id="filterbar">
+      <button class="btn" id="cNew"><img src="node_modules/godot-theme/icons/Add.svg" alt=""><span>New</span></button>
+      <button class="btn small opt" id="cSort"><img src="node_modules/godot-theme/icons/Sort.svg" alt=""><span>Sort: Name</span><span class="chev">▾</span></button>
+      <div class="search-wrap"><input id="search" placeholder="Filter Projects"><button class="clear-btn" id="searchClear" hidden>✕</button></div>
+    </div>
+    <div id="content">
+      <div id="listPanel">
+        <div class="prow selected">
+          <div class="picon"><img src="node_modules/godot-theme/icons/Godot.svg" alt=""></div>
+          <div class="pmain">
+            <div class="ptitle-row"><span class="ptitle">Consumer App</span><span class="tags"><span class="tag ver-tag">4.5</span></span></div>
+            <div class="ppath-row"><span class="ppath">installed from tarball</span></div>
+            <div class="pmeta"><span>tarball install · file:// · no build</span></div>
+          </div>
+          <div class="vbtns"><button class="btn small go" id="cRun"><img src="node_modules/godot-theme/icons/Play.svg" alt=""><span>Run</span></button></div>
+        </div>
+        <div class="gal-row" style="display:flex;gap:6px;margin-top:8px">
+          <span class="radial" id="cRing"><svg width="44" height="44" viewBox="0 0 44 44"><circle class="rk-track" cx="22" cy="22" r="18"></circle><circle class="rk-fill" cx="22" cy="22" r="18"></circle></svg><span class="pct">0%</span></span>
+          <label class="check"><input type="checkbox" id="cAgree"><span class="box"><svg class="ok" viewBox="0 0 16 16" width="12" height="12"><rect width="14" height="14" x="1" y="1" fill="#699ce8" rx="2.33"/><path fill="#fff" d="M11.5 3.734 5.89 9.346 4.185 7.665l-1.5 1.499 3.204 3.18L13 5.235z"/></svg><svg class="er" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span> I agree</label>
+        </div>
+      </div>
+      <aside id="sidebar">
+        <button class="side-btn primary" id="cEdit"><img src="node_modules/godot-theme/icons/Edit.svg" alt=""><span>Edit</span></button>
+        <button class="side-btn" id="cAbout"><img src="node_modules/godot-theme/icons/Heart.svg" alt=""><span>About</span></button>
+      </aside>
+    </div>
+  </div>
+  <footer id="statusbar"><span>consumer test</span></footer>
+</div>
+<div id="ctxMenu" hidden></div>
+<div id="toaster"></div>
+<div id="tooltip" hidden></div>
+<div id="dlgAbout" class="dlg-back" hidden>
+  <div class="dlg about">
+    <div class="about-head"><img src="node_modules/godot-theme/icons/Godot.svg" width="56" height="56" alt=""><div><h3>Consumer</h3><div class="muted">installed via npm, served via file://</div></div></div>
+    <div class="dlg-actions left"><button class="btn small" id="dlgClose"><span>Close</span></button></div>
+  </div>
+</div>
+<script src="node_modules/godot-theme/godot.js"></script>
+<script>
+// Classic scripts only — proves the file:// consumer story (no modules, no server).
+GodotDS.toast('Installed from tarball — works', 'success', 'godot-theme');
+GodotDS.bindSearch('search', 'searchClear');
+GodotDS.ring(document.getElementById('cRing'), 65);
+GodotDS.menu(640, 300, [
+  { label: 'Open', icon: 'node_modules/godot-theme/icons/Play.svg', accel: 'Ctrl+O' },
+  { label: 'Show hidden', checked: true },
+  { sep: true },
+  { label: 'Sort by', submenu: [{ label: 'Name', radio: true, cur: true }, { label: 'Date', radio: true }] },
+], () => {});
+GodotDS.bindDialog('dlgAbout', null, 'dlgClose', null);
+document.getElementById('cNew').onclick = () => GodotDS.toast('New (consumer)', 'info');
+document.getElementById('cRun').onclick = () => GodotDS.toast('Run (consumer)', 'success');
+document.getElementById('cEdit').onclick = () => GodotDS.toast('Edit (consumer)', 'info');
+document.getElementById('cAbout').onclick = () => GodotDS.openDialog('dlgAbout');
+document.getElementById('cSort').onclick = (e) => {
+  const r = e.currentTarget.getBoundingClientRect();
+  GodotDS.menu(r.left, r.bottom + 4, [{ label: 'Name', radio: true, cur: true }, { label: 'Date', radio: true }], () => {});
+};
+GodotDS.tips();
+</script>
+</body>
+</html>

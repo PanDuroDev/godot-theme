@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT — forms</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="forms"></aside>
+
+      <div class="docs-main">
+        <h1>Forms</h1>
+        <p class="hero-tag">Change anything — the live state below updates. Godot CheckBox / Switch / Radio styling.</p>
+
+        <div id="formDemo">
+          <div class="gal-sec"><h2>Text / select / range</h2>
+            <div class="gal-row"><div class="search-wrap" style="max-width:320px">
+              <input id="search" placeholder="Filter Projects" aria-label="Filter projects"><button class="clear-btn" id="searchClear" hidden>✕</button><span class="search-icon"><img src="icons/Search.svg" width="16" height="16" alt=""></span>
+            </div></div>
+            <div class="gal-row">
+              <input type="text" id="fName" value="New Game Project" style="background:var(--panel-dark);border:0;color:var(--text);border-radius:var(--radius);height:30px;padding:0 10px;max-width:320px;width:100%">
+            </div>
+            <div class="gal-row">
+              <button class="btn small opt" id="fUnitBtn" style="min-width:90px"><span>KB</span><span class="chev">▾</span></button>
+              <input id="fVol" class="slider" type="range" min="1" max="50" step="0.5" value="10" style="width:200px">
+            </div>
+            <p class="demo-note">HSlider from Godot master: thin dark line + white-dot grabber with ring (GuiSliderGrabber — ring brightens on hover).</p>
+            <div class="gal-row">
+              <input type="range" class="slider" value="30" disabled style="width:200px">
+              <span class="muted">disabled</span>
+            </div>
+          </div>
+
+          <div class="gal-sec"><h2>Check / switch / radio</h2>
+            <div class="gal-row">
+              <label class="check"><input type="checkbox" id="fEdit" checked><span class="box"><svg class="ok" viewBox="0 0 16 16" width="12" height="12"><rect width="14" height="14" x="1" y="1" fill="#699ce8" rx="2.33"/><path fill="#fff" d="M11.5 3.734 5.89 9.346 4.185 7.665l-1.5 1.499 3.204 3.18L13 5.235z"/></svg><svg class="er" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span> Edit Now</label>
+              <label class="switch"><input type="checkbox" id="fNotify" checked><span class="trk"><span class="knob"></span></span></label>
+              <span class="muted">Notify</span>
+            </div>
+            <div class="gal-row">
+              <label class="check" id="agreeWrap"><input type="checkbox" id="fAgree"><span class="box"><svg class="ok" viewBox="0 0 16 16" width="12" height="12"><rect width="14" height="14" x="1" y="1" fill="#699ce8" rx="2.33"/><path fill="#fff" d="M11.5 3.734 5.89 9.346 4.185 7.665l-1.5 1.499 3.204 3.18L13 5.235z"/></svg><svg class="er" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 4l8 8M12 4l-8 8"/></svg></span> I agree (required)</label>
+              <button class="btn small" id="agreeValidate"><img src="icons/StatusSuccess.svg" alt=""><span>Validate</span></button>
+            </div>
+            <p class="demo-note">No emoji anywhere — SVG icons only. A required box left unchecked validates to the red X (<span class="mono">.check.error</span>); checking it clears the error.</p>
+            <div class="radio-col" id="fRend">
+              <label><input type="radio" name="rend" value="forward_plus" checked> Forward+</label>
+              <label><input type="radio" name="rend" value="mobile"> Mobile</label>
+              <label><input type="radio" name="rend" value="gl_compatibility"> Compatibility</label>
+            </div>
+            <pre class="code">&lt;label class="check"&gt;&lt;input type="checkbox" checked&gt;&lt;span class="box"&gt;&lt;svg class="ok" …/&gt;&lt;svg class="er" …/&gt;&lt;/span&gt; Edit Now&lt;/label&gt;
+&lt;label class="check error"&gt;…&lt;/label&gt;  &lt;!-- required + invalid → red X --&gt;
+&lt;input type="range" class="slider"&gt;  &lt;!-- HSlider: GuiSliderGrabber --&gt;</pre>
+          </div>
+
+          <div class="gal-sec"><h2>Live state</h2>
+            <div id="formState"></div>
+            <div class="gal-row" style="margin-top:8px"><button class="btn small" id="formReset"><img src="icons/Reload.svg" alt=""><span>Reset</span></button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span>.check · .switch · .radio-col · .search-wrap</span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+const $ = (id) => document.getElementById(id);
+function snapshot() {
+  return {
+    filter: $('search').value,
+    name: $('fName').value,
+    unit: document.querySelector('#fUnitBtn span').textContent,
+    volume: $('fVol').value,
+    editNow: $('fEdit').checked,
+    notify: $('fNotify').checked,
+    agree: $('fAgree').checked,
+    renderer: document.querySelector('#fRend input:checked').value,
+  };
+}
+function render() { $('formState').textContent = JSON.stringify(snapshot()); }
+document.getElementById('formDemo').addEventListener('input', render);
+document.getElementById('formDemo').addEventListener('change', render);
+GodotDS.bindSearch('search', 'searchClear', render);
+const unitState = { current: 'KB' };
+document.getElementById('fUnitBtn').onclick = (e) => {
+  const btn = e.currentTarget;
+  GodotDS.optMenu(btn, [
+    { v: 'KB', label: 'KB', radio: true },
+    { v: 'MB', label: 'MB', radio: true },
+  ], unitState.current, (v) => {
+    unitState.current = v;
+    btn.querySelector('span').textContent = v;
+    render();
+    GodotDS.toast('Unit: ' + v, 'info');
+  });
+};
+document.getElementById('formReset').onclick = () => {
+  $('search').value = ''; $('searchClear').hidden = true;
+  $('fName').value = 'New Game Project';
+  unitState.current = 'KB';
+  document.querySelector('#fUnitBtn span').textContent = 'KB';
+  $('fVol').value = '10';
+  $('fEdit').checked = true; $('fNotify').checked = true;
+  $('fAgree').checked = false; $('agreeWrap').classList.remove('error');
+  document.querySelector('#fRend input[value="forward_plus"]').checked = true;
+document.getElementById('agreeValidate').onclick = () => {
+  if (!$('fAgree').checked) {
+    $('agreeWrap').classList.add('error');
+    GodotDS.toast('You must agree first', 'error', 'Required');
+  } else {
+    $('agreeWrap').classList.remove('error');
+    GodotDS.toast('Agreed', 'success');
+  }
+  render();
+};
+$('fAgree').addEventListener('change', () => { if ($('fAgree').checked) $('agreeWrap').classList.remove('error'); });
+render();
+  GodotDS.toast('Form reset', 'info');
+};
+render();
+
+</script>
+</body>
+</html>

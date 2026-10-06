@@ -1,0 +1,19 @@
+/* godot-theme tags, pills, dots, chips. */
+.tags{display:flex;gap:4px;margin-inline-start:auto;flex-shrink:0}
+.tag{font-size:12px;padding:1px 8px;background:var(--btn);border:0;border-radius:0 4px 4px 0;color:var(--text);font-family:inherit}
+.tag[data-tag]{cursor:pointer}
+.tag[data-tag]:hover{background:var(--btn-hover)}
+.tag.ver-tag{background:#2f4a2f;color:#93c795}
+.tag.ok{background:#2c5a34;color:#93c795}
+.pill{font-size:12px;padding:1px 9px;background:var(--btn);border:0;border-radius:0 4px 4px 0;color:var(--text);display:inline-flex;align-items:center;gap:6px}
+.pill.beta{background:#5a4a17;color:#d4c79e}
+.pill.ok{background:#2c5a34;color:#bfe6c6}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--warn);display:inline-block;flex-shrink:0}
+.dot.ok{background:var(--success)}
+.dot.err{background:var(--danger)}
+.chips{display:flex;flex-wrap:wrap;gap:4px;min-height:24px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--btn);border-radius:0 4px 4px 0;padding:3px 4px 3px 9px;font-size:12px}
+.chip button{background:none;border:0;color:var(--faint);cursor:pointer;display:flex;padding:0}
+.chip button:hover{color:#fff}
+.chip:hover{background:var(--btn-hover)}
+.chip svg{width:10px;height:10px}

@@ -1,0 +1,48 @@
+/* godot-theme buttons. Source: godot-launcher (.btn/.side-btn/.flat/.view-toggle) + lab (.go/.danger) */
+.btn{background:var(--btn);border:1px solid var(--btn-border);color:var(--text);border-radius:var(--radius);padding:6px 8px;min-height:32px;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-family:inherit;position:relative}
+.btn:not(.opt) > img,.btn:not(.opt) > svg{position:absolute;left:8px}
+.btn:not(.opt) > span{flex:1;text-align:center}
+.btn:not(.opt):has(> img, > svg) > span{padding-left:20px} /* offset only when an icon exists */
+.btn:hover{background:var(--btn-hover);border-color:#535353;color:rgba(255,255,255,.85)}
+.btn:active{background:var(--btn-pressed);border-color:#575757;color:rgba(255,255,255,.85)}
+.btn:disabled{background:#3a3a3a;border-color:transparent;color:rgba(255,255,255,.35);cursor:default}
+.btn:disabled img{opacity:.35}
+.btn.small{padding:4px 12px;font-size:12px;min-height:28px}
+.btn.accent{background:var(--btn);border-color:var(--btn-border)}
+.btn.accent:hover{background:var(--btn-hover)}
+.btn.accent:active{background:var(--btn-pressed)}
+.btn.go{background:var(--accent);border-color:transparent;color:#101418;font-weight:700}
+.btn.go:hover{background:var(--accent-hover);border-color:transparent;color:#101418}
+.btn.danger{background:#5a2b28;border-color:#6e3530;color:#f0b9b4}
+.btn.danger:hover{background:#6e3530;border-color:#6e3530;color:#fff}
+.btn.opt{justify-content:space-between}
+.btn.opt .chev{opacity:.7;display:flex;flex-shrink:0}
+.btn img{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.side-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-height:32px;background:var(--btn);border:1px solid var(--btn-border);color:var(--text);border-radius:var(--radius);padding:6px 8px;font-size:14px;cursor:pointer;text-align:center;position:relative;font-family:inherit}
+.side-btn > img,.side-btn > svg{position:absolute;left:8px}
+.side-btn > span{flex:1;text-align:center}
+.side-btn:has(> img, > svg) > span{padding-left:22px} /* offset only when an icon exists */
+.side-btn svg{flex-shrink:0;opacity:.8}
+.side-btn img{width:16px;height:16px;flex-shrink:0;opacity:.85}
+.side-btn:hover:not(:disabled){background:var(--btn-hover);border-color:#535353;color:rgba(255,255,255,.85)}
+.side-btn:active:not(:disabled){background:var(--btn-pressed);border-color:#575757;color:rgba(255,255,255,.85)}
+.side-btn:disabled{background:#3a3a3a;border-color:transparent;color:rgba(255,255,255,.35);cursor:default}
+.side-btn:disabled img{opacity:.35}
+.side-btn.primary{background:var(--btn);border-color:var(--btn-border)}
+.side-btn.primary:hover:not(:disabled){background:var(--btn-hover)}
+.side-btn.go{background:var(--accent);border-color:transparent;color:#101418;font-weight:700}
+.side-btn.go:hover:not(:disabled){background:var(--accent-hover);color:#101418}
+.flat{background:none;border:0;color:var(--text);cursor:pointer;padding:6px 8px;border-radius:var(--radius);display:inline-flex;align-items:center;gap:6px;font-family:inherit}
+.flat:hover{background:#383838}
+.flat:active{background:var(--btn)}
+.view-toggle{display:flex;align-items:center;gap:4px;background:transparent;border:0;color:rgba(255,255,255,.7);font-size:18px;padding:7px 14px;cursor:pointer;border-radius:var(--radius);font-family:inherit}
+.view-toggle svg{opacity:.8}
+.view-toggle.active{color:var(--accent);background:transparent}
+.view-toggle:hover{color:rgba(255,255,255,.85)}
+.linklike{background:none;border:0;color:var(--text);text-decoration:underline;cursor:pointer;font-size:14px;padding:4px 0;font-family:inherit}
+.linklike:hover{color:rgba(255,255,255,.85)}
+@media (max-width:760px){
+  #sidebar{width:46px}
+  .side-btn span{display:none}
+  .side-btn{justify-content:center;padding:6px 0}
+}

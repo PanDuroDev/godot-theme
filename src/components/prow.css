@@ -1,0 +1,26 @@
+/* godot-theme project/app row. Mirrors ProjectListItemControl: HBox, separation 10, icon 64 (project_list.cpp). */
+.prow{display:flex;align-items:center;gap:10px;padding:2px 4px;border:1px solid transparent;border-radius:var(--radius);cursor:default;min-height:68px}
+.prow:hover{background:var(--row-hover)}
+.prow.selected{background:var(--sel)}
+.prow.selected:hover{background:var(--sel-hover)}
+.prow.grayed .pmain{opacity:.5}
+.picon{width:var(--row-icon);height:var(--row-icon);flex-shrink:0;border-radius:0;background:#20242e;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.picon img{width:var(--row-icon);height:var(--row-icon);object-fit:cover}
+.picon svg{width:34px;height:34px;opacity:.9;color:#9db4d4}
+.pmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ptitle-row{display:flex;align-items:center;gap:4px;min-width:0}
+.ptitle{font-size:var(--title-size);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptitle.missing{color:#ff7a75}
+.ppath-row{display:flex;align-items:center;gap:4px;min-width:0}
+.ppath{font-size:14px;color:var(--muted);direction:ltr;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.pmeta{display:flex;gap:4px;font-size:14px;color:var(--faint);white-space:nowrap}
+.explore{background:none;border:0;color:var(--text);opacity:.5;cursor:pointer;padding:2px;display:flex;border-radius:var(--radius);flex-shrink:0}
+.explore:hover{opacity:1;background:#383838}
+.explore.broken{opacity:1}
+.explore img{width:16px;height:16px;display:block}
+.vbtns{margin-inline-start:auto;display:flex;gap:6px;flex-shrink:0}
+.prow > .btn{margin-inline-start:auto;flex-shrink:0}
+.fav{background:none;border:0;cursor:pointer;padding:4px;color:var(--faint);display:flex}
+.fav.on{color:#ffd454}
+.fav:hover{color:#fff}
+.fav img{width:16px;height:16px;display:block}

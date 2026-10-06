@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT — icons</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="icons"></aside>
+
+      <div class="docs-main">
+        <h1>Icons — every Godot editor icon</h1>
+        <p class="hero-tag">All <span id="icountTop">…</span> SVGs from <span class="mono">godotengine/godot:editor/icons</span> (MIT), auto-sorted by <span class="mono">scripts/build-icons.mjs</span> rules — no manual filing. Get one, copy its source, or download a whole category.</p>
+        <div class="gal-row">
+          <div class="search-wrap" style="max-width:320px">
+            <input id="isearch" placeholder="Filter icons…" aria-label="Filter icons"><button class="clear-btn" id="isearchClear" hidden>✕</button><span class="search-icon"><img src="icons/Search.svg" width="16" height="16" alt=""></span>
+          </div>
+        </div>
+        <div class="gal-row" id="catPills"></div>
+        <div id="catRoot"></div>
+        <h2>Use</h2>
+        <pre class="code">&lt;img src="godot-theme/icons/Play.svg" width="16" height="16" alt=""&gt;
+&lt;button class="btn"&gt;&lt;img src="godot-theme/icons/Add.svg"&gt;&lt;span&gt;New&lt;/span&gt;&lt;/button&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span id="icount"></span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+import manifest from './icons/manifest.json' with { type: 'json' };
+const mods = import.meta.glob('./icons/godot/*.svg', { query: '?url', import: 'default', eager: true });
+const urlOf = (f) => mods['./icons/' + f];
+
+const cats = [];
+for (const m of manifest) {
+  let g = cats.find((x) => x.name === m.c);
+  if (!g) { g = { name: m.c, items: [] }; cats.push(g); }
+  g.items.push({ name: m.n, url: urlOf(m.f) });
+}
+
+function card(ic) {
+  const el = document.createElement('div');
+  el.className = 'icard';
+  el.dataset.name = ic.name.toLowerCase();
+  const im = document.createElement('img');
+  im.src = ic.url; im.alt = ic.name; im.width = 32; im.height = 32; im.loading = 'lazy';
+  const nm = document.createElement('span');
+  nm.className = 'mono'; nm.textContent = ic.name;
+  const row = document.createElement('div');
+  row.className = 'irow';
+  const dl = document.createElement('a');
+  dl.className = 'btn small'; dl.href = ic.url; dl.download = ic.name;
+  dl.innerHTML = '<span>Get</span>';
+  const cp = document.createElement('button');
+  cp.className = 'btn small';
+  cp.innerHTML = '<span>Copy</span>';
+  cp.onclick = async () => {
+    try {
+      const t = await (await fetch(ic.url)).text();
+      await navigator.clipboard.writeText(t);
+      GodotDS.toast('Copied ' + ic.name, 'success');
+    } catch { GodotDS.toast('Copy failed', 'error'); }
+  };
+  row.append(dl, cp);
+  el.append(im, nm, row);
+  return el;
+}
+
+const root = document.getElementById('catRoot');
+const pills = document.getElementById('catPills');
+let activeCat = '';
+function paintPills() {
+  pills.innerHTML = '';
+  const mk = (label, cat) => {
+    const b = document.createElement('button');
+    b.className = 'btn small' + (activeCat === cat ? ' go' : '');
+    b.innerHTML = `<span>${label}</span>`;
+    b.onclick = () => { activeCat = cat; paintPills(); applyFilter(document.getElementById('isearch').value); };
+    pills.appendChild(b);
+  };
+  mk(`All (${manifest.length})`, '');
+  for (const g of cats) mk(`${g.name} (${g.items.length})`, g.name);
+}
+for (const g of cats) {
+  const sec = document.createElement('div');
+  sec.dataset.cat = g.name;
+  const head = document.createElement('div');
+  head.className = 'gal-row';
+  head.style.marginTop = '8px';
+  const h = document.createElement('h2');
+  h.style.margin = '0';
+  h.textContent = `${g.name} — ${g.items.length}`;
+  const dl = document.createElement('button');
+  dl.className = 'btn small';
+  dl.innerHTML = '<span>Download category</span>';
+  dl.onclick = async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    GodotDS.toast(`Downloading ${g.items.length} icons…`, 'info');
+    for (const ic of g.items) {
+      const a = document.createElement('a');
+      a.href = ic.url; a.download = ic.name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      await new Promise((r) => setTimeout(r, 250));
+    }
+    btn.disabled = false;
+    GodotDS.toast('Done', 'success');
+  };
+  head.append(h, dl);
+  const grid = document.createElement('div');
+  grid.className = 'igrid';
+  for (const ic of g.items) grid.appendChild(card(ic));
+  sec.append(head, grid);
+  root.appendChild(sec);
+}
+function applyFilter(q) {
+  q = q.trim().toLowerCase();
+  let n = 0;
+  document.querySelectorAll('#catRoot > div[data-cat]').forEach((sec) => {
+    const catOk = !activeCat || sec.dataset.cat === activeCat;
+    let shown = 0;
+    sec.querySelectorAll('.icard').forEach((c) => {
+      const ok = catOk && (!q || c.dataset.name.includes(q));
+      c.style.display = ok ? '' : 'none';
+      if (ok) { shown++; n++; }
+    });
+    sec.style.display = shown ? '' : 'none';
+  });
+  document.getElementById('icount').textContent = `${n} of ${manifest.length} icons`;
+}
+GodotDS.bindSearch('isearch', 'isearchClear', applyFilter);
+paintPills();
+applyFilter('');
+document.getElementById('icountTop').textContent = manifest.length;
+
+</script>
+</body>
+</html>

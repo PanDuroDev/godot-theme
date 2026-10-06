@@ -1,0 +1,10 @@
+/* godot-theme — single entry. Apps replace their <link> with this one file. file:// safe, no build needed. */
+@import url('tokens/tokens.css');
+@import url('src/base.css');
+@import url('src/components/layout.css');
+@import url('src/components/button.css');
+@import url('src/components/prow.css');
+@import url('src/components/tag.css');
+@import url('src/components/form.css');
+@import url('src/components/dialog.css');
+@import url('src/components/overlay.css');

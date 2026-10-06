@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT — tokens</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="tokens"></aside>
+
+      <div class="docs-main">
+        <h1>Tokens</h1>
+        <p class="hero-tag">Source of truth: <span class="mono">tokens/godot.json</span> — grouped below, every token with its Godot engine origin. Click any row to copy its variable. Regenerate outputs with <span class="mono">npm run tokens:build</span>.</p>
+        <div id="tokRoot"></div>
+        <h2>Token checklist (verified vs godotengine/godot master)</h2>
+        <pre class="code">accent #569EFF  = accent_color (0.337, 0.62, 1.0) — Modern default preset
+panel  #292929  = base_color (0.161, 0.161, 0.161) — Modern default preset
+radius 4px      = Modern corner_radius (Classic used 3)
+font   14px     = editor base font size — titles are base + 1 (15px, bold)
+gap    4px      = Default spacing preset (Compact 2, Spacious 6)
+brand  #478cbf / #414042 = Godot Blue / Gray (editor_color_map.cpp)</pre>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span id="tokCount"></span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+import data from './tokens/godot.json' with { type: 'json' };
+
+const FIX = { 'radius.md': 'radius', 'font.family': 'font', 'font.size-base': 'font-size', 'font.size-title': 'title-size', 'font.size-small': 'small-size', 'font.size-tiny': 'tiny-size', 'spacing.base': 'gap', 'spacing.titlebar': 'titlebar-h', 'spacing.row-icon': 'row-icon', 'spacing.row-icon-compact': 'row-icon-sm', 'spacing.sidebar': 'sidebar-w' };
+const GROUPS = { color: 'Color', radius: 'Shape', font: 'Type', spacing: 'Space' };
+const groups = {};
+(function walk(node, path = []) {
+  for (const [k, v] of Object.entries(node)) {
+    if (k.startsWith('$') || k === 'godot-theme') continue;
+    if (v && typeof v === 'object' && '$value' in v) {
+      const key = [...path, k].join('.');
+      const g = path[0];
+      (groups[g] ||= []).push({ name: FIX[key] || (g === 'color' ? k : key), value: v.$value, desc: v.$description || '' });
+    } else if (v && typeof v === 'object') walk(v, [...path, k]);
+  }
+})(data);
+
+const root = document.getElementById('tokRoot');
+let n = 0;
+for (const [g, title] of Object.entries(GROUPS)) {
+  if (!groups[g]) continue;
+  const h = document.createElement('h2'); h.textContent = title; root.appendChild(h);
+  const tbl = document.createElement('table'); tbl.className = 'tok';
+  const head = document.createElement('tr'); head.innerHTML = '<th>Token</th><th>Value</th><th>Godot source</th>'; tbl.appendChild(head);
+  for (const t of groups[g]) {
+    n++;
+    const isColor = /^#/.test(t.value) || t.value.startsWith('rgba');
+    const tr = document.createElement('tr');
+    tr.title = 'Click to copy --' + t.name;
+    tr.style.cursor = 'pointer';
+    const td1 = document.createElement('td'); td1.className = 'mono'; td1.textContent = '--' + t.name;
+    const td2 = document.createElement('td'); td2.className = 'mono';
+    if (isColor) { const s = document.createElement('span'); s.className = 'swcell'; s.style.background = t.value; td2.appendChild(s); }
+    td2.appendChild(document.createTextNode(t.value));
+    const td3 = document.createElement('td'); td3.textContent = t.desc;
+    tr.append(td1, td2, td3);
+    tr.onclick = () => {
+      const v = '--' + t.name;
+      if (navigator.clipboard) navigator.clipboard.writeText(v).catch(() => {});
+      GodotDS.toast('Copied ' + v, 'success');
+    };
+    tbl.appendChild(tr);
+  }
+  root.appendChild(tbl);
+}
+document.getElementById('tokCount').textContent = `${n} tokens in ${Object.keys(groups).length} groups`;
+
+</script>
+</body>
+</html>

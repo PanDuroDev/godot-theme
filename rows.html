@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT — rows</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="rows"></aside>
+
+      <div class="docs-main">
+        <h1>Rows</h1>
+        <p class="hero-tag">Mirrors ProjectListItemControl: 64px icon, separation 10. Type in the filter — rows filter live, like the launcher. Click a tag to filter by it.</p>
+
+        <div class="gal-sec"><h2>Search + rows</h2>
+          <div class="gal-row"><div class="search-wrap" style="max-width:320px">
+            <input id="search" placeholder="Filter Projects" aria-label="Filter projects"><button class="clear-btn" id="searchClear" hidden>✕</button><span class="search-icon"><img src="icons/Search.svg" width="16" height="16" alt=""></span>
+          </div></div>
+          <div id="rowList">
+            <div class="prow selected" data-title="demo project">
+              <button class="fav on"><img src="icons/Favorites.svg" alt="fav"></button>
+              <div class="picon"><img src="icons/ProjectList.svg" alt=""></div>
+              <div class="pmain">
+                <div class="ptitle-row"><span class="ptitle">Demo Project</span><span class="tags"><span class="tag" data-tag="demo">demo</span><span class="tag ver-tag">4.5</span></span></div>
+                <div class="ppath-row"><button class="explore" data-explore="C:\GodotProjects\demo"><img src="icons/Load.svg" alt=""></button><span class="ppath">C:\GodotProjects\demo</span></div>
+                <div class="pmeta"><span>2026-10-05 01:00</span></div>
+              </div>
+              <div class="vbtns"><button class="btn small go" data-toast="Run Demo Project" data-type="success"><img src="icons/Play.svg" alt=""><span>Run</span></button><button class="btn small" data-toast="Preview Demo Project"><img src="icons/Zoom.svg" alt=""><span>Preview</span></button></div>
+            </div>
+            <div class="prow" data-title="second app" style="margin-top:4px">
+              <button class="fav"><img src="icons/Unfavorite.svg" alt="fav"></button>
+              <div class="picon"><img src="icons/ProjectList.svg" alt=""></div>
+              <div class="pmain">
+                <div class="ptitle-row"><span class="ptitle">Second App</span><span class="tags"><span class="tag" data-tag="lab">lab</span></span></div>
+                <div class="ppath-row"><button class="explore" data-explore="D:\lab\second"><img src="icons/Load.svg" alt=""></button><span class="ppath">D:\lab\second</span></div>
+                <div class="pmeta"><span>2026-10-04 22:10</span></div>
+              </div>
+              <div class="vbtns"><button class="btn small go" data-toast="Run Second App" data-type="success"><img src="icons/Play.svg" alt=""><span>Run</span></button><button class="btn small" data-toast="Preview Second App"><img src="icons/Zoom.svg" alt=""><span>Preview</span></button></div>
+            </div>
+            <div class="prow grayed" data-title="missing project" style="margin-top:4px">
+              <div class="picon"><img src="icons/ProjectList.svg" alt=""></div>
+              <div class="pmain">
+                <div class="ptitle-row"><span class="ptitle missing">Missing Project</span></div>
+                <div class="ppath-row"><button class="explore broken" data-explore="D:\gone\demo"><img src="icons/Load.svg" alt=""></button><span class="ppath">D:\gone\demo</span></div>
+                <div class="pmeta"><span>missing on filesystem</span></div>
+              </div>
+            </div>
+          </div>
+          <p class="demo-note" id="rowCount"></p>
+          <div class="empty" id="rowEmpty" hidden>
+            <p><b>No rows match.</b> Try a different filter.</p>
+            <div class="empty-actions"><button class="btn" id="emptyClear"><span>Clear filter</span></button></div>
+          </div>
+          <pre class="code">&lt;div class="prow selected"&gt;
+  &lt;button class="fav on"&gt;…&lt;/button&gt;
+  &lt;div class="picon"&gt;&lt;img src="icon.svg"&gt;&lt;/div&gt;
+  &lt;div class="pmain"&gt;
+    &lt;div class="ptitle-row"&gt;&lt;span class="ptitle"&gt;Name&lt;/span&gt;
+      &lt;span class="tags"&gt;&lt;span class="tag ver-tag"&gt;4.5&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="ppath-row"&gt;…&lt;span class="ppath"&gt;C:\…&lt;/span&gt;&lt;/div&gt;
+    &lt;div class="pmeta"&gt;…&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="vbtns"&gt;…&lt;/div&gt;
+&lt;/div&gt;</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Tags / pills / chips</h2>
+          <div class="gal-row">
+            <span class="pill"><span class="dot"></span>pending</span>
+            <span class="pill ok"><span class="dot ok"></span>ready</span>
+            <span class="pill beta">beta</span>
+            <span class="chips"><span class="chip">demo <button aria-label="remove">✕</button></span><span class="chip">lab <button aria-label="remove">✕</button></span></span>
+          </div>
+          <p class="demo-note">Click a chip ✕ to remove it (Manage Tags dialog behavior).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span>.prow · .tag · .pill · .chip · .search-wrap</span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+const rows = [...document.querySelectorAll('#rowList .prow')];
+function applyFilter(q) {
+  q = q.trim().toLowerCase();
+  let n = 0;
+  rows.forEach((r) => {
+    const show = !q || r.dataset.title.includes(q);
+    r.style.display = show ? '' : 'none';
+    if (show) n++;
+  });
+  document.getElementById('rowCount').textContent = `${n} of ${rows.length} rows`;
+  document.getElementById('rowEmpty').hidden = n > 0;
+}
+GodotDS.bindSearch('search', 'searchClear', applyFilter);
+document.getElementById('emptyClear').onclick = () => {
+  document.getElementById('search').value = '';
+  document.getElementById('searchClear').hidden = true;
+  applyFilter('');
+};
+applyFilter('');
+document.querySelectorAll('[data-tag]').forEach((t) => {
+  t.onclick = () => {
+    document.getElementById('search').value = t.dataset.tag;
+    applyFilter(t.dataset.tag);
+    document.getElementById('searchClear').hidden = false;
+  };
+});
+document.querySelectorAll('.fav').forEach((b) => {
+  b.onclick = () => {
+    const on = b.classList.toggle('on');
+    b.querySelector('img').src = on ? 'icons/Favorites.svg' : 'icons/Unfavorite.svg';
+  };
+});
+document.querySelectorAll('[data-explore]').forEach((b) => {
+  b.onclick = () => GodotDS.toast('Open folder: ' + b.dataset.explore, 'info');
+});
+document.querySelectorAll('[data-toast]').forEach((b) => { b.onclick = () => GodotDS.toast(b.dataset.toast, b.dataset.type || 'info'); });
+document.querySelectorAll('.chip button').forEach((b) => { b.onclick = () => b.closest('.chip').remove(); });
+document.querySelectorAll('#rowList .prow').forEach((r) => {
+  r.addEventListener('click', (e) => {
+    if (e.target.closest('button')) return;
+    document.querySelectorAll('#rowList .prow').forEach((x) => x.classList.remove('selected'));
+    r.classList.add('selected');
+  });
+});
+
+</script>
+</body>
+</html>

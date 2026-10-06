@@ -1,0 +1,7 @@
+node_modules/
+test/consumer/node_modules/
+test/consumer/package-lock.json
+dist/
+*.tgz
+.DS_Store
+*.log

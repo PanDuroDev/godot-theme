@@ -1,0 +1,9 @@
+{
+  "name": "godot-theme-consumer-fixture",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "godot-theme": "file:../../../../Temp/User/godot-theme-5R0oPS/godot-theme-1.1.0.tgz"
+  }
+}

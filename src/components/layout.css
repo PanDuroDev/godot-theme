@@ -1,0 +1,25 @@
+/* godot-theme layout shell. Owns these ids — both apps already use them identically (project_manager.cpp layout). */
+#root{display:flex;flex-direction:column;height:100vh;padding:4px;gap:4px}
+#titlebar{display:flex;align-items:center;gap:8px;min-height:var(--titlebar-h)}
+#logoBtn{display:flex;align-items:center;padding:6px 8px}
+#logoBtn img{display:block}
+#viewToggles{display:flex;gap:4px;margin:0 auto}
+#mainPanel{flex:1;min-height:0;display:flex;flex-direction:column;gap:4px;background:var(--panel);border-radius:var(--radius);padding:6px 8px;overflow:hidden}
+#filterbar{display:flex;align-items:center;gap:4px}
+#content{display:flex;gap:4px;flex:1;min-height:0}
+#listPanel{flex:1;background:var(--list-bg);border:0;border-radius:var(--radius);overflow-y:auto;padding:6px;min-width:0}
+#sidebar{width:var(--sidebar-w);flex-shrink:0;display:flex;flex-direction:column;gap:4px}
+#sidebar .grow{flex:1;min-height:4px}
+#statusbar{display:flex;justify-content:flex-end;align-items:center;gap:20px;color:rgba(255,255,255,.6);font-size:11px;padding:0 4px}
+#verBtn{background:none;border:0;color:rgba(255,255,255,.6);font-size:11px;cursor:pointer;padding:2px 4px;border-radius:3px;font-family:inherit}
+#verBtn:hover{color:var(--text);background:#383838}
+.sep{height:1px;background:var(--sep);margin:4px 2px}
+.side-label{font-size:11px;color:var(--faint);margin:0 2px}
+/* Empty state — official ProjectManager empty panel. */
+.empty{text-align:center;color:var(--text);padding:40px}
+.empty p{margin:0 0 16px}
+.empty-actions{display:flex;gap:4px;justify-content:center}
+.empty-actions .btn{background:#3a3a3a;border-color:transparent}
+.empty-actions .btn:hover{background:#4b4b4b}
+.empty-actions .btn:active{background:#545454}
+.empty-note{font-style:italic;text-align:center;color:var(--faint);font-size:12px;max-width:640px;margin:12px auto 0}

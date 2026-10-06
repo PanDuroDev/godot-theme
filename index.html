@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" type="image/svg+xml" href="icons/Godot.svg"><meta name="description" content="GT - Godot Theme: dark Godot editor theme as a vanilla CSS design system."><meta name="theme-color" content="#141414">
+<title>GT - Godot Theme</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="index"></aside>
+
+      <div class="docs-main">
+        <h1>Godot Modern, as a library</h1>
+        <p class="hero-tag">The Godot 4.6+ dark editor theme — vanilla CSS + tiny JS helpers for Electron apps. Quoted from godot-launcher first, sourced from godotengine/godot master always.</p>
+        <div class="gal-row">
+          <pre class="code" style="margin:0">npm install godot-theme</pre>
+          <span class="muted">MIT · no dependencies · works over file:// with zero build</span>
+        </div>
+
+        <h2>Install — pick one</h2>
+        <pre class="code">npm install godot-theme           # 1) npm package
+npm install ../godot-theme        #    alternative: install from local path
+&lt;!-- 2) direct link after install: --&gt;
+&lt;link rel="stylesheet" href="node_modules/godot-theme/godot.css"&gt;
+&lt;script src="node_modules/godot-theme/godot.js"&gt;&lt;/script&gt;
+&lt;!-- 3) copy the folder next to your app: --&gt;
+&lt;link rel="stylesheet" href="../godot-theme/godot.css"&gt;
+&lt;script src="../godot-theme/godot.js"&gt;&lt;/script&gt;</pre>
+
+        <h2>Use in 30 seconds</h2>
+        <pre class="code">&lt;button class="btn"&gt;&lt;img src="godot-theme/icons/Add.svg"&gt;&lt;span&gt;New&lt;/span&gt;&lt;/button&gt;
+&lt;script&gt;
+  GodotDS.toast('Engine downloaded', 'success');
+  GodotDS.openDialog('dlgNew');
+  GodotDS.bindSearch('search', 'searchClear');
+&lt;/script&gt;</pre>
+        <p class="demo-note">Try it live — these buttons use the library itself:</p>
+        <div class="gal-row">
+          <button class="btn" data-toast="New project (demo)"><img src="icons/Add.svg" alt=""><span>New</span></button>
+          <button class="btn go" data-toast="Generate (demo)" data-type="success"><img src="icons/AudioStreamRandomizer.svg" alt=""><span>Generate</span></button>
+          <button class="btn danger" data-toast="Delete (demo)" data-type="error"><img src="icons/Remove.svg" alt=""><span>Delete</span></button>
+        </div>
+
+        <h2>Explore</h2>
+        <div class="cards">
+          <div class="card"><b>Tokens</b><p>38 tokens grouped, each with its Godot engine source. Click a row to copy.</p><a class="btn small" href="tokens.html"><span>Open tokens</span></a></div>
+        <div class="card"><b>Icons</b><p>Official editor SVGs — preview, download one or all, copy source.</p><a class="btn small" href="icons.html"><span>Open icons</span></a></div>
+        <div class="card"><b>Fonts</b><p>Inter, Vazirmatn, JetBrains Mono — Godot's own files.</p><a class="btn small" href="fonts.html"><span>Open fonts</span></a></div>
+        <div class="card"><b>Changelog</b><p>Every release in plain words, newest first.</p><a class="btn small" href="changelog.html"><span>Open changelog</span></a></div>
+          <div class="card"><b>Buttons</b><p>btn, side-btn, flat, toggles — every button live.</p><a class="btn small" href="buttons.html"><span>Open buttons</span></a></div>
+          <div class="card"><b>Rows</b><p>Project rows, tags, pills, live search filter.</p><a class="btn small" href="rows.html"><span>Open rows</span></a></div>
+          <div class="card"><b>Forms</b><p>Inputs, select, range, check, switch, radio with live state.</p><a class="btn small" href="forms.html"><span>Open forms</span></a></div>
+          <div class="card"><b>Dialogs</b><p>New project, file browser, about — all working.</p><a class="btn small" href="dialogs.html"><span>Open dialogs</span></a></div>
+          <div class="card"><b>Overlays</b><p>Toasts, context menu, tooltip, progress.</p><a class="btn small" href="overlays.html"><span>Open overlays</span></a></div>
+        </div>
+
+        <h2>Develop the library itself (maintainers)</h2>
+        <pre class="code">npm install
+npm run dev      # docs site + HMR — http://localhost:5173
+npm run build    # static dist/ + packed library file for download
+npm run serve    # serve dist/ locally — :4173
+npm adduser      # once: create / login npm account
+npm publish --access public  # publish (name godot-theme is free); bump version before each re-publish
+npm test         # smoke + coverage + tokens + consumer-pack check</pre>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span>GT — MIT</span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+import './godot.js';
+document.querySelectorAll('[data-toast]').forEach((b) => { b.onclick = () => GodotDS.toast(b.dataset.toast, b.dataset.type || 'info'); });
+
+</script>
+</body>
+</html>
