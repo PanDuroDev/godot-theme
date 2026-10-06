@@ -13,7 +13,7 @@ const tmp = mkdtempSync(join(tmpdir(), 'godot-theme-'));
 try {
   execSync(`npm pack --pack-destination "${tmp}"`, { cwd: root, stdio: 'pipe' });
   const tgz = join(tmp, `godot-theme-${version}.tgz`);
-  execSync(`npm install --no-audit --no-fund --offline "${tgz}"`, { cwd: consumer, stdio: 'pipe' });
+  execSync(`npm install --no-save --no-audit --no-fund --offline "${tgz}"`, { cwd: consumer, stdio: 'pipe' });
   execSync('node test.mjs', { cwd: consumer, stdio: 'inherit' });
   console.log('consumer OK');
 } finally {
