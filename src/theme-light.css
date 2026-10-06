@@ -1,0 +1,34 @@
+/* GT Light preset — mirrors Godot's Light color preset (editor_theme_manager.cpp):
+   base #e6e6e6, accent #2e80ff, negative contrast. Apply via <html data-theme="light">.
+   Non-color tokens (radius, fonts, spacing) are shared. The project tile (.picon)
+   intentionally stays dark so artwork pops on both themes. */
+[data-theme="light"]{
+  color-scheme:light;
+  --bg:#cfcfcf; --panel:#e6e6e6; --panel-dark:#dbdbdb; --list-bg:#e0e0e0; --popup:#f4f4f4;
+  --btn:#d2d2d2; --btn-hover:#c6c6c6; --btn-pressed:#bababa; --btn-border:#bcbcbc;
+  --accent:#2e80ff; --accent-hover:#1f6bef;
+  --success:#1e7a34; --danger:#c23527; --warn:#8a6410;
+  --text:rgba(0,0,0,.85); --muted:rgba(0,0,0,.6); --faint:rgba(0,0,0,.4);
+  --sep:rgba(0,0,0,.14); --sel:#c2d6f2; --sel-hover:#b5c9ec; --row-hover:#d8d8d8;
+  --scroll-thumb:rgba(0,0,0,.25); --scroll-thumb-hover:rgba(0,0,0,.45);
+  --selection:rgba(46,128,255,.3);
+}
+/* Hardcoded dark hovers/text that tokens don't cover. */
+[data-theme="light"] #tooltip{color:rgba(0,0,0,.85)}
+[data-theme="light"] input{caret-color:#000}
+[data-theme="light"] .flat:hover{background:#d2d2d2}
+[data-theme="light"] .clear-btn{color:rgba(0,0,0,.7)}
+[data-theme="light"] .clear-btn:hover{color:#000;background:#d2d2d2}
+[data-theme="light"] #verBtn{color:rgba(0,0,0,.6)}
+[data-theme="light"] #verBtn:hover{color:var(--text);background:#d2d2d2}
+[data-theme="light"] .explore:hover{background:#d2d2d2}
+[data-theme="light"] #ctxMenu button:hover,[data-theme="light"] .ctxmenu button:hover{background:#d4d9e2;color:#000}
+[data-theme="light"] .btn:disabled,[data-theme="light"] .side-btn:disabled{background:#c4c4c4;border-color:transparent;color:rgba(0,0,0,.4)}
+[data-theme="light"] .empty-actions .btn{background:#c9c9c9;border-color:transparent}
+[data-theme="light"] .empty-actions .btn:hover{background:#bdbdbd}
+[data-theme="light"] .empty-actions .btn:active{background:#b2b2b2}
+[data-theme="light"] .tag.ver-tag,[data-theme="light"] .tag.ok{background:#cfe8d4;color:#1e6b34}
+[data-theme="light"] .pill.beta{background:#e5d3a0;color:#6b5312}
+[data-theme="light"] .pill.ok{background:#cfe8d4;color:#1e6b34}
+[data-theme="light"] .switch .knob{background:rgba(0,0,0,.45)}
+[data-theme="light"] .switch input:checked + .trk .knob{background:#fff}

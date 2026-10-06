@@ -8,3 +8,5 @@
 @import url('src/components/form.css');
 @import url('src/components/dialog.css');
 @import url('src/components/overlay.css');
+/* light preset last: data-theme="light" overrides win ties */
+@import url('src/theme-light.css');

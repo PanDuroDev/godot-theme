@@ -72,7 +72,7 @@
 
 ## overlay.css — EditorToaster / menu / tooltip / progress
 
-`#toaster > .toast-note.info|success|warn|error > .msg + .t-x` (عبر `GodotDS.toast(msg, type, title)`)، `#tooltip` (أهداف `data-tip`)، `.dlbar > i` (`style.width`)، `.spin` (غير محدد).
+`#toaster > .toast-note.info|success|warn|error > .msg + .t-x` (عبر `GodotDS.toast(msg, type, title, ms)` — أيقونة لكل نوع، حد 5 متراكمة، `ms` افتراضي 5000)، `#tooltip` (أهداف `data-tip`)، `.dlbar > i` (`style.width`)، `.spin` (غير محدد).
 
 ```html
 &lt;span class="radial"&gt;&lt;svg …&gt;&lt;circle class="rk-track" …/&gt;&lt;circle class="rk-fill" …/&gt;&lt;/svg&gt;&lt;span class="pct"&gt;0%&lt;/span&gt;&lt;/span&gt;

@@ -5,6 +5,7 @@
 @font-face{font-family:'Vazirmatn';font-weight:700;font-style:normal;font-display:swap;src:url('../fonts/Vazirmatn_Bold.woff2') format('woff2')}
 @font-face{font-family:'JetBrains Mono';font-weight:400;font-style:normal;font-display:swap;src:url('../fonts/JetBrainsMono_Regular.woff2') format('woff2')}
 *{box-sizing:border-box}
+html{color-scheme:dark}
 [hidden]{display:none!important}
 html,body{margin:0;height:100%}
 body{background:var(--bg);color:var(--text);font:14px/1.45 var(--font);overflow:hidden;user-select:none}

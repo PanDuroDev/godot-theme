@@ -6,19 +6,30 @@
     return t.content.firstChild;
   }
 
-  // toast(msg, type) — type: info | success | warn | error. Needs <div id="toaster">.
-  function toast(msg, type = 'info', title) {
+  // toast(msg, type, title, ms) — type: info | success | warn | error (anything else
+  // falls back to info). At most TOAST_MAX stack; oldest dismissed first.
+  // Needs <div id="toaster"> (created if missing).
+  const TOAST_ICONS = {
+    info: '<svg viewBox="0 0 16 16" width="14" height="14"><path fill="#e0e0e0" d="M8 1a7 7 0 0 0 0 14A7 7 0 0 0 8 1m1 12H7v-2h2v2M4.5 6a3.5 3.4 0 1 1 7 0C11.3 8.9 9 8.5 9 10H7c.1-2.6 2.4-2.8 2.5-4a1.5 1.4 0 0 0-3 0z"/></svg>',
+    success: '<svg viewBox="0 0 16 16" width="14" height="14"><path fill="#5fff97" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm3.293 3.877 1.414 1.414L7 12.001 3.293 8.29l1.414-1.414L7 9.17z"/></svg>',
+    warn: '<svg viewBox="0 0 16 16" width="14" height="14"><path fill="#ffdd65" d="M8 1a7 7 0 0 0 0 14A7 7 0 0 0 8 1zM7 3h2v7H7zm0 8h2v2H7z"/></svg>',
+    error: '<svg viewBox="0 0 16 16" width="14" height="14"><path fill="#ff5f5f" d="M8 1a7 7 0 0 0 0 14A7 7 0 0 0 8 1zM5.172 3.758 8 6.586l2.828-2.828 1.414 1.414L9.414 8l2.828 2.828-1.414 1.414L8 9.414l-2.828 2.828-1.414-1.414L6.586 8 3.758 5.172l1.414-1.414z"/></svg>',
+  };
+  const TOAST_MAX = 5;
+  function toast(msg, type = 'info', title, ms = 5000) {
     let box = document.getElementById('toaster');
     if (!box) {
       box = document.createElement('div');
       box.id = 'toaster';
       document.body.appendChild(box);
     }
-    const n = el(`<div class="toast-note ${type}"><span class="msg"></span><button class="t-x" aria-label="Close">✕</button></div>`);
+    const safe = TOAST_ICONS[type] ? type : 'info';
+    const n = el(`<div class="toast-note ${safe}"><span class="t-ico">${TOAST_ICONS[safe]}</span><span class="msg"></span><button class="t-x" aria-label="Close">✕</button></div>`);
     n.querySelector('.msg').textContent = (title ? title + '\n' : '') + msg;
     n.querySelector('.t-x').onclick = () => n.remove();
     box.appendChild(n);
-    setTimeout(() => n.remove(), 5000);
+    while (box.children.length > TOAST_MAX) box.children[0].remove();
+    setTimeout(() => n.remove(), ms);
     return n;
   }
 

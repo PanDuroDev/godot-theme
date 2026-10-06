@@ -20,8 +20,8 @@ function makeEl(tag = 'div') {
     getAttribute(k) { return this[k]; },
     removeAttribute(k) { delete this[k]; },
     hasAttribute(k) { return k in this && this[k] !== undefined; },
-    appendChild(c) { this.children.push(c); return c; },
-    remove() { this.removed = true; },
+    appendChild(c) { c._parent = this; this.children.push(c); return c; },
+    remove() { this.removed = true; const p = this._parent; if (p) { const i = p.children.indexOf(this); if (i >= 0) p.children.splice(i, 1); } },
     focus() { this.focused = true; },
     click() { this.fire('click'); },
     querySelectorAll() { return []; },
@@ -56,7 +56,7 @@ global.window = { innerWidth: 1280, innerHeight: 800,
   removeEventListener: (t, fn) => { const a = (global.window._l || {})[t] || []; const i = a.indexOf(fn); if (i >= 0) a.splice(i, 1); },
 };
 const timers = [];
-global.setTimeout = (fn) => { timers.push(fn); return 0; };
+global.setTimeout = (fn, ms) => { timers.push({ fn, ms }); return 0; };
 
 // Load godot.js (it guards module.exports)
 const src = readFileSync(join(root, 'godot.js'), 'utf8');
@@ -70,7 +70,7 @@ const box = makeEl('div'); box.id = 'toaster'; byId.toaster = box;
 const msgStub = makeEl('span'), xStub = makeEl('button');
 const origCreate = global.document.createElement;
 global.document.createElement = (t) => {
-  if (t === 'template') return { _v: '', set innerHTML(v) { this._v = v; }, get content() { const self = this; return { get firstChild() { const n = makeEl('div'); const m = /class="([^"]*)"/.exec(self._v || ''); if (m) n.className = m[1]; n.stubs = { msg: msgStub, 't-x': xStub }; return n; } }; } };
+  if (t === 'template') return { _v: '', set innerHTML(v) { this._v = v; }, get content() { const self = this; return { get firstChild() { const n = makeEl('div'); n._innerHTML = self._v || ''; const m = /class="([^"]*)"/.exec(self._v || ''); if (m) n.className = m[1]; n.stubs = { msg: msgStub, 't-x': xStub }; return n; } }; } };
   return origCreate(t);
 };
 const n = G.toast('hello', 'success', 'Done');
@@ -79,6 +79,15 @@ assert(msgStub.textContent.includes('hello') && msgStub.textContent.includes('Do
 assert(box.children.length === 1, 'toast appended to #toaster');
 xStub.fire('click');
 assert(n.removed === true, 'toast ✕ removes node');
+// toast icons, unknown-type fallback, stacking cap, custom duration
+const iconToast = G.toast('with icon', 'warn');
+assert(iconToast.innerHTML.includes('t-ico') && iconToast.innerHTML.includes('<svg'), 'toast renders type icon');
+const fallbackToast = G.toast('fallback', 'nope');
+assert(fallbackToast.className.includes('toast-note info'), 'unknown type falls back to info');
+for (let i = 0; i < 7; i++) G.toast('spam ' + i, 'info');
+assert(box.children.length === 5, 'toast stack capped at 5');
+G.toast('slow', 'info', null, 9000);
+assert(timers[timers.length - 1].ms === 9000, 'toast honors custom duration');
 
 // dialog open/close + backdrop click
 const dlg = makeEl('div'); byId.dlgDemo = dlg;

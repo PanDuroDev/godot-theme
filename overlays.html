@@ -77,6 +77,32 @@ GodotDS.ring(el, 65);  // indeterminate? use .spin</pre>
 <div id="ctxMenu" hidden></div>
 <div id="toaster"></div>
 <div id="tooltip" hidden></div>
+<script>
+// TEMP screenshot hook — removed before release
+if (location.search.includes('demo')) {
+  const iv = setInterval(() => {
+    if (!window.GodotDS) return;
+    clearInterval(iv);
+    const mode = new URLSearchParams(location.search).get('demo');
+    if (mode === 'light') document.documentElement.dataset.theme = 'light';
+    if (mode === 'toasts') {
+      GodotDS.toast('Editor note', 'info', 'Info');
+      GodotDS.toast('Engine downloaded', 'success', 'Done');
+      GodotDS.toast('Unstable build', 'warn', 'Careful');
+      GodotDS.toast('Download failed', 'error', 'Error');
+    }
+    if (mode === 'search') {
+      const log2 = [];
+      window.addEventListener('resize', () => log2.push('resize'));
+      window.addEventListener('scroll', () => log2.push('scroll'), true);
+      GodotDS.menu(400, 200, [{ label: 'Alpha' }, { label: 'Beta' }], () => {});
+      setTimeout(() => {
+        document.body.insertAdjacentHTML('beforeend', '<div id="diag2">' + log2.join('|') + '#menu-hidden=' + document.getElementById('ctxMenu').hidden + '</div>');
+      }, 3000);
+    }
+  }, 50);
+}
+</script>
 <script type="module">
 import './site.js';
 import './godot.js';

@@ -36,3 +36,13 @@
 | `--titlebar-h` | `44px` | title bar (project_manager.cpp) |
 | `--row-icon` / `--row-icon-sm` | `64px` / `40px` | ProjectListItemControl 64 |
 | `--sidebar-w` | `160px` | sidebar (project_manager.cpp) |
+
+## Theming
+
+All color tokens can be overridden for the Light preset (Godot's `Light` color preset in `editor_theme_manager.cpp`) without touching components:
+
+```html
+&lt;html data-theme="light"&gt;
+```
+
+`src/theme-light.css` holds every override (surfaces, text, buttons, hovers, status colors). Non-color tokens (radius, fonts, spacing) are shared. The project tile (`.picon`) intentionally stays dark on both themes.
