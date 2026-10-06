@@ -53,11 +53,12 @@ godot-theme/
 ├── scripts/build-tokens.mjs ← token generator (stdlib only, zero dependencies)
 ├── src/base.css           ← reset + fonts + scrollbar + focus
 ├── src/components/*.css   ← one file per component (button, prow, tag, form, dialog, layout, overlay)
+├── src/utilities.css      ← single-property helpers (spacing, text, backgrounds)
 ├── godot.css / godot.js   ← the single entry point
 ├── icons/ (28 curated) + icons/godot/ (all 1042) + manifest ← rule-based auto-sorting
 ├── scripts/build-icons.mjs ← downloads everything + manifest (`--cats` checks rules locally)
 ├── fonts/ Inter + Vazirmatn (Arabic) + JetBrains Mono — Godot's own thirdparty files + OFL licenses
-├── index.html / tokens.html / icons.html / fonts.html / buttons.html / rows.html / forms.html / dialogs.html / overlays.html + site.css ← the site (Vite)
+├── index.html / tokens.html / icons.html / fonts.html / buttons.html / rows.html / forms.html / dialogs.html / overlays.html / utilities.html + site.css + site.js ← the site (Vite)
 └── docs/                  ← written docs (feeds the site later)
 ```
 

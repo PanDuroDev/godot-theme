@@ -8,5 +8,7 @@
 @import url('src/components/form.css');
 @import url('src/components/dialog.css');
 @import url('src/components/overlay.css');
+/* utilities last: single-property helpers win ties with components */
+@import url('src/utilities.css');
 /* light preset last: data-theme="light" overrides win ties */
 @import url('src/theme-light.css');

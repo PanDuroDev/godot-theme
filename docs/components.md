@@ -108,4 +108,8 @@ GodotDS.tips(); // or GodotDS.tips(scopeEl) — also toggles on tap for touch.
 ```
 // Keyboard (APG menu pattern): arrows/Home/End move, Enter/Space activate, Right/Left opens/closes submenus (mirrored in RTL), Esc closes one level. `optMenu` returns focus to its button. Menus carry `menu/menuitem*` roles; dialogs need `role="dialog"` (above).
 
+## utilities.css — single-property helpers
+
+`<div class="prow p-2 gap-2">` — layout (`d-flex/grid/block/none`, `fd-row/col`, `ai-*`, `jc-*`, `fg-1`, `fw-wrap`, `min-w-0`), gap (`gap-1/2`), spacing (`m/p-0/1/2`, `mt/mb/ms/me-1`), text (`fs-11..16`, `fw-400/700`, `text-start/center/end`, `text-ellipsis`, `text[-muted/-faint/-accent/-success/-danger/-warn]`), backgrounds (`bg-panel/-dark/-list/-popup/-btn/-accent/-transparent`), shape (`rounded/rounded-0`), misc (`w/h-full`, `ov-auto/hidden`, `cur-pointer/default`). Imported last so utilities win ties; reserved names are listed here to avoid consumer collisions.
+
 حقول العنصر: `label`، `icon` (عمود أيقونة دائم — `set_item_icon`)، `cur` (أبيض + صح، نمط `openOpt` في اللانشر)، `checked` (صح تتبدل)، `radio` (راديو دائم الظهور للمحدد وغيره — `OptionButton`، ويُستخدم مع `cur` للمحدد)، `accel`، `sep`، `submenu`، `disabled`.

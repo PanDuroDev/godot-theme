@@ -29,6 +29,7 @@
               <input id="search" placeholder="Filter Projects" aria-label="Filter projects"><button class="clear-btn" id="searchClear" hidden>✕</button><span class="search-icon"><img src="icons/Search.svg" width="16" height="16" alt=""></span>
             </div></div>
             <div class="gal-row">
+<!-- layout-specific: standalone input demo (lib styles inputs inside .dlg) -->
               <input type="text" id="fName" value="New Game Project" style="background:var(--panel-dark);border:0;color:var(--text);border-radius:var(--radius);height:30px;padding:0 10px;max-width:320px;width:100%">
             </div>
             <div class="gal-row">
@@ -65,7 +66,7 @@
 
           <div class="gal-sec"><h2>Live state</h2>
             <div id="formState"></div>
-            <div class="gal-row" style="margin-top:8px"><button class="btn small" id="formReset"><img src="icons/Reload.svg" alt=""><span>Reset</span></button></div>
+            <div class="gal-row mt-2"><button class="btn small" id="formReset"><img src="icons/Reload.svg" alt=""><span>Reset</span></button></div>
           </div>
         </div>
       </div>

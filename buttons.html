@@ -44,7 +44,8 @@
 
         <div class="gal-sec"><h2>.side-btn — sidebar stack</h2>
           <div class="gal-row">
-            <div style="background:var(--panel);border-radius:var(--radius);padding:8px">
+            <div class="bg-panel rounded p-2">
+<!-- layout-specific: demo height, no token for it -->
               <aside id="sidebar" style="min-height:230px">
                 <div class="sep"></div>
                 <button class="side-btn primary" data-toast="Edit (demo)"><img src="icons/Edit.svg" alt=""><span>Edit</span></button>
@@ -53,7 +54,7 @@
                 <button class="side-btn" disabled><img src="icons/Remove.svg" alt=""><span>Remove</span></button>
                 <div class="sep"></div>
                 <label class="side-label">Project Engine:</label>
-                <button class="btn small opt" id="engineDemo" style="width:100%"><img src="icons/Godot.svg" alt=""><span>4.5-stable</span><span class="chev">▾</span></button>
+                <button class="btn small opt w-full" id="engineDemo"><img src="icons/Godot.svg" alt=""><span>4.5-stable</span><span class="chev">▾</span></button>
                 <div class="grow"></div>
                 <button class="side-btn" data-toast="Donate (demo)"><img src="icons/Heart.svg" alt=""><span>Donate</span></button>
               </aside>

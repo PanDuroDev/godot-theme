@@ -24,6 +24,7 @@ export default defineConfig({
         forms: 'forms.html',
         dialogs: 'dialogs.html',
         overlays: 'overlays.html',
+        utilities: 'utilities.html',
       },
     },
   },

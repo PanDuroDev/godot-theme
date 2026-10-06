@@ -1,6 +1,6 @@
 // Docs-site chrome: sidebar nav, version pills, shared wiring.
 // Single source of truth for release chores: bump GT_VERSION together with package.json.
-const GT_VERSION = '1.3.1';
+const GT_VERSION = '1.4.0';
 
 const NAV = [
   { group: 'System' },
@@ -15,6 +15,7 @@ const NAV = [
   { href: 'forms.html', label: 'Forms', id: 'forms' },
   { href: 'dialogs.html', label: 'Dialogs', id: 'dialogs' },
   { href: 'overlays.html', label: 'Overlays', id: 'overlays' },
+  { href: 'utilities.html', label: 'Utilities', id: 'utilities' },
 ];
 
 (function buildNav() {
@@ -113,6 +114,7 @@ const SEARCH_INDEX = [
   { t: 'Forms', s: 'input check switch radio slider search validate', href: 'forms.html' },
   { t: 'Dialogs', s: 'new project file browser about confirm', href: 'dialogs.html' },
   { t: 'Overlays', s: 'toast menu tooltip progress ring submenu', href: 'overlays.html' },
+  { t: 'Utilities', s: 'spacing text background flex gap margin padding', href: 'utilities.html' },
 ];
 function openSearch(anchor) {
   let q = '';

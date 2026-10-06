@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GT - utilities</title>
+<link rel="stylesheet" href="godot.css">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<div id="root">
+  <header id="titlebar">
+    <span class="flat"><img src="icons/ProjectList.svg" width="24" height="24" alt=""><b>&nbsp;GT</b><span class="muted">Godot Theme</span><span class="pill ok ver-pill"></span></span>
+    <button id="rtlBtn" class="flat" title="Toggle RTL">RTL</button>
+  </header>
+
+  <div id="mainPanel">
+    <div id="content">
+      <aside id="sidebar" class="docs-nav" data-nav="utilities"></aside>
+
+      <div class="docs-main">
+        <h1>Utilities</h1>
+        <p class="hero-tag">Single-property helpers that compose with components (<span class="mono">&lt;div class="prow p-2 gap-2"&gt;</span>). Every value comes from tokens; the file is imported last so utilities win ties. No <span class="mono">!important</span> anywhere.</p>
+
+        <div class="gal-sec"><h2>Layout</h2>
+          <div class="gal-row">
+            <div class="d-flex gap-1 bg-panel-dark rounded p-1"><span class="tag">a</span><span class="tag">b</span><span class="tag">c</span></div>
+            <span class="tag beta">d-none hides</span>
+          </div>
+          <pre class="code">.d-flex .d-inline-flex .d-grid .d-block .d-none</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Flexbox</h2>
+          <div class="gal-row">
+            <div class="d-flex fd-col gap-1 bg-panel-dark rounded p-1"><span class="tag">col</span><span class="tag">col</span></div>
+            <div class="d-flex ai-center jc-between bg-panel-dark rounded p-1" style="width:220px"><span class="tag">l</span><span class="tag">r</span></div>
+          </div>
+          <pre class="code">.fd-row .fd-col .ai-center/.ai-start/.ai-end .jc-start/.jc-center/.jc-end/.jc-between
+.fg-1 .fw-wrap .min-w-0</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Spacing (gap scale)</h2>
+          <div class="gal-row">
+            <div class="d-flex gap-1 bg-panel-dark rounded p-1"><span class="tag">4px</span><span class="tag">4px</span></div>
+            <div class="d-flex gap-2 bg-panel-dark rounded p-1"><span class="tag">8px</span><span class="tag">8px</span></div>
+            <div class="bg-btn rounded p-2 text-muted fs-12">p-2 box</div>
+          </div>
+          <pre class="code">.gap-1 .gap-2 .m-0/.m-1/.m-2 .p-0/.p-1/.p-2 .mt-1 .mb-1 .ms-1 .me-1</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Text</h2>
+          <div class="gal-row"><span class="fs-11 text-faint">11 faint</span><span class="fs-12 text-muted">12 muted</span><span class="fs-14 text">14 text</span><span class="fs-15 fw-700">15 bold</span><span class="fs-16 fw-700">16 bold</span></div>
+          <div class="gal-row"><span class="tag text-accent">accent</span><span class="tag text-success">success</span><span class="tag text-danger">danger</span><span class="tag text-warn">warn</span></div>
+          <div class="bg-panel-dark rounded p-1 text-ellipsis" style="max-width:280px">ellipsis truncates this long line of text with an ellipsis</div>
+          <pre class="code">.fs-11..16 .fw-400/.fw-700 .text-start/.text-center/.text-end .text-ellipsis
+.text .text-muted .text-faint .text-accent .text-success/.text-danger/.text-warn</pre>
+        </div>
+
+        <div class="gal-sec"><h2>Backgrounds &amp; shape</h2>
+          <div class="gal-row">
+            <span class="tag bg-panel">panel</span><span class="tag bg-panel-dark">dark</span><span class="tag bg-list">list</span><span class="tag bg-popup">popup</span><span class="tag bg-btn">btn</span><span class="tag bg-accent">accent</span>
+          </div>
+          <pre class="code">.bg-panel/.bg-panel-dark/.bg-list/.bg-popup/.bg-btn/.bg-accent/.bg-transparent
+.rounded .rounded-0 .w-full .h-full .ov-auto/.ov-hidden .cur-pointer/.cur-default</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="statusbar"><span>utilities · single-property · token-backed</span><button id="verBtn" class="ver-pill"></button></footer>
+</div>
+<div id="toaster"></div>
+<script type="module">
+import './site.js';
+</script>
+</body>
+</html>

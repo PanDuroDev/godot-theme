@@ -8,7 +8,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const fail = (m) => { console.error('FAIL: ' + m); process.exitCode = 1; };
 const cssFiles = ['tokens/tokens.css', 'src/base.css', ...[
   'layout', 'button', 'prow', 'tag', 'form', 'dialog', 'overlay',
-].map((n) => `src/components/${n}.css`), 'src/theme-light.css'];
+].map((n) => `src/components/${n}.css`), 'src/theme-light.css', 'src/utilities.css'];
 
 // 1. godot.css imports resolve
 const entry = readFileSync(join(root, 'godot.css'), 'utf8');
