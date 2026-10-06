@@ -1,6 +1,6 @@
 {
   "name": "godot-theme",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "GT (Godot Theme) — dark Godot editor theme as a vanilla CSS + tiny JS design system for Electron apps",
   "license": "MIT",
   "engines": {

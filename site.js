@@ -1,6 +1,6 @@
 // Docs-site chrome: sidebar nav, version pills, shared wiring.
 // Single source of truth for release chores: bump GT_VERSION together with package.json.
-const GT_VERSION = '1.2.0';
+const GT_VERSION = '1.2.1';
 
 const NAV = [
   { group: 'System' },
