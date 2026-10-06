@@ -32,3 +32,12 @@
 [data-theme="light"] .pill.ok{background:#cfe8d4;color:#1e6b34}
 [data-theme="light"] .switch .knob{background:rgba(0,0,0,.45)}
 [data-theme="light"] .switch input:checked + .trk .knob{background:#fff}
+/* FIX-MAP batch 1: hardcoded light-on-light text that tokens don't cover. */
+[data-theme="light"] .btn:hover,[data-theme="light"] .btn:active,
+[data-theme="light"] .side-btn:hover:not(:disabled),[data-theme="light"] .side-btn:active:not(:disabled){color:rgba(0,0,0,.85)}
+[data-theme="light"] .view-toggle{color:rgba(0,0,0,.6)}
+[data-theme="light"] .view-toggle:hover{color:rgba(0,0,0,.85)}
+[data-theme="light"] .dlg .muted{color:rgba(0,0,0,.65)}
+[data-theme="light"] #ctxMenu button.cur,[data-theme="light"] .ctxmenu button.cur{color:#000}
+[data-theme="light"] .toast-note .t-x:hover,[data-theme="light"] .chip button:hover{color:#000}
+[data-theme="light"] #statusbar{color:var(--faint)}
