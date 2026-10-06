@@ -76,6 +76,15 @@ const ALLOW = new Map([
   ['.hidden', 'lab: generic hide helper (lib uses [hidden])'],
 ]);
 
+// Consumer apps are optional: present on the author's machine, absent in CI
+// and on other machines. Coverage is enforced wherever they exist.
+const APPS = [
+  'D:\\Projects\\godot-launcher\\styles.css',
+  'D:\\Projects\\random-exe-lab\\electron\\ui\\styles.css',
+].filter((f) => {
+  if (!existsSync(f)) { console.warn(`verify: skipping missing app file ${f}`); return false; }
+  return true;
+});
 const selRe = /([.#])([A-Za-z][\w-]*)/g;
 function selectorsOf(file) {
   const out = new Set();
@@ -89,10 +98,14 @@ const lib = new Set();
 for (const f of cssFiles) for (const s of selectorsOf(join(root, f))) lib.add(s);
 
 let missing = [];
-for (const app of ['D:\\Projects\\godot-launcher\\styles.css', 'D:\\Projects\\random-exe-lab\\electron\\ui\\styles.css']) {
+for (const app of APPS) {
   for (const s of selectorsOf(app)) {
     if (!lib.has(s) && !ALLOW.has(s) && !missing.includes(`${s} (${app})`)) missing.push(`${s} (${app})`);
   }
 }
 if (missing.length) fail('selectors not in library:\n  ' + missing.join('\n  '));
-if (!process.exitCode) console.log(`verify OK — ${lib.size} selectors cover both apps (${ALLOW.size} app-specific allowlisted)`);
+if (!process.exitCode) {
+  console.log(APPS.length
+    ? `verify OK — ${lib.size} selectors cover both apps (${ALLOW.size} app-specific allowlisted)`
+    : `verify OK — internal integrity only (${lib.size} selectors, no consumer apps present)`);
+}
